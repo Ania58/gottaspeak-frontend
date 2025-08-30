@@ -1,10 +1,15 @@
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
 function App() {
-  
 
   return (
     <>
-      <h1>Hello</h1>
+      <Router>
+        <Header />
+        <Routes>
+          <Route index element={<div className="p-6">Home</div>} />
+        </Routes>
+      </Router>
     </>
   )
 }
