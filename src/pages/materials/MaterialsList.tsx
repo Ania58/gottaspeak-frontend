@@ -57,13 +57,14 @@ export default function MaterialsList() {
 
   const selectedTags = (sp.get("tags") || "")
     .split(",")
-    .map(s => s.trim())
+    .map((s) => s.trim())
     .filter(Boolean);
   const tagsMode: "any" | "all" = sp.get("tagsMode") === "all" ? "all" : "any";
 
   const [data, setData] = useState<Paginated<Material> | null>(null);
   const [error, setError] = useState("");
   const [tagsOptions, setTagsOptions] = useState<string[]>([]);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
     const ac = new AbortController();
@@ -73,7 +74,7 @@ export default function MaterialsList() {
       ? `${API_URL}/materials/tags?${params.toString()}`
       : `${API_URL}/materials/tags`;
     fetch(url, { signal: ac.signal })
-      .then(r => r.json() as Promise<{ tags: string[] }>)
+      .then((r) => r.json() as Promise<{ tags: string[] }>)
       .then(({ tags }) => setTagsOptions(tags || []))
       .catch(() => {});
     return () => ac.abort();
@@ -145,9 +146,9 @@ export default function MaterialsList() {
   }
   function toggleTag(tag: string) {
     const s = new URLSearchParams(sp);
-    const cur = (s.get("tags") || "").split(",").map(x => x.trim()).filter(Boolean);
+    const cur = (s.get("tags") || "").split(",").map((x) => x.trim()).filter(Boolean);
     const has = cur.includes(tag);
-    const next = has ? cur.filter(t => t !== tag) : [...cur, tag];
+    const next = has ? cur.filter((t) => t !== tag) : [...cur, tag];
     if (next.length) s.set("tags", next.join(","));
     else s.delete("tags");
     s.set("page", "1");
@@ -170,168 +171,193 @@ export default function MaterialsList() {
   const canNext = !!data && page < data.totalPages;
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-6">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-semibold">{t("nav.materials")}</h1>
-        <div className="flex flex-wrap items-center gap-3 text-sm">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              submitSearch();
-            }}
-            className="flex items-center gap-2"
-          >
-            <label htmlFor="searchBox" className="sr-only">
-              {t("materials.filters.search")}
-            </label>
-            <input
-              id="searchBox"
-              className="rounded border px-2 py-1"
-              placeholder={t("materials.filters.searchPlaceholder")}
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-            />
-            <button className="rounded border px-2 py-1 hover:bg-black/5">
-              {t("materials.filters.searchBtn")}
-            </button>
-          </form>
-
-          <label className="text-black/70" htmlFor="typeFilter">
-            {t("materials.filters.type")}
-          </label>
-          <select
-            id="typeFilter"
-            className="rounded border px-2 py-1"
-            value={type || ""}
-            onChange={(e) => setType((e.target.value as MaterialType) || "")}
-          >
-            <option value="">{t("materials.filters.allTypes")}</option>
-            <option value="grammar">{t("materials.filters.grammar")}</option>
-            <option value="vocabulary">{t("materials.filters.vocabulary")}</option>
-            <option value="other">{t("materials.filters.other")}</option>
-          </select>
-
-          <label className="ml-2 text-black/70" htmlFor="sortBy">
-            {t("materials.sort.by")}
-          </label>
-          <select
-            id="sortBy"
-            className="rounded border px-2 py-1"
-            value={sortBy}
-            onChange={(e) =>
-              setSortBy(e.target.value as "createdAt" | "updatedAt" | "order" | "title")
-            }
-          >
-            <option value="createdAt">{t("materials.sort.createdAt")}</option>
-            <option value="updatedAt">{t("materials.sort.updatedAt")}</option>
-            <option value="order">{t("materials.sort.order")}</option>
-            <option value="title">{t("materials.sort.title")}</option>
-          </select>
-
-          <label className="ml-1 text-black/70" htmlFor="sortDir">
-            {t("materials.sort.direction")}
-          </label>
-          <select
-            id="sortDir"
-            className="rounded border px-2 py-1"
-            value={sortDir}
-            onChange={(e) => setSortDir(e.target.value === "asc" ? "asc" : "desc")}
-          >
-            <option value="desc">{t("materials.sort.desc")}</option>
-            <option value="asc">{t("materials.sort.asc")}</option>
-          </select>
-
-          <label className="ml-2 text-black/70" htmlFor="limitSel">
-            {t("materials.filters.limit")}
-          </label>
-          <select
-            id="limitSel"
-            className="rounded border px-2 py-1"
-            value={limit}
-            onChange={(e) => setLimit(parseInt(e.target.value, 10))}
-          >
-            {[10, 20, 50].map((n) => (
-              <option key={n} value={n}>
-                {n}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {tagsOptions.length > 0 && (
-        <div className="mb-4 flex flex-wrap items-center gap-2 text-sm">
-          <span className="text-black/70">{t("materials.filters.tags")}</span>
-          <div className="flex flex-wrap gap-2">
-            {tagsOptions.map(tag => {
-              const active = selectedTags.includes(tag);
-              return (
-                <button
-                  key={tag}
-                  type="button"
-                  onClick={() => toggleTag(tag)}
-                  className={
-                    "rounded border px-2 py-1 " +
-                    (active
-                      ? "bg-gradient-to-r from-lime-200 via-cyan-200 to-violet-200"
-                      : "hover:bg-black/5")
-                  }
-                >
-                  {tag}
-                </button>
-              );
-            })}
+    <div className="mx-auto w-full max-w-5xl px-3 py-4 sm:px-4 sm:py-6">
+      <div className="rounded-xl border bg-gradient-to-b from-lime-50/60 via-cyan-50/50 to-violet-50/60 p-4 shadow-sm sm:p-6">
+        <div className="mb-3 flex items-center justify-between gap-3 sm:mb-4">
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight">{t("nav.materials")}</h1>
+            <div className="mt-2 h-1 w-24 rounded-full bg-gradient-to-r from-lime-400 via-cyan-400 to-violet-400" />
           </div>
           <button
             type="button"
-            onClick={clearTags}
-            className="ml-2 rounded border px-2 py-1 hover:bg-black/5"
+            aria-expanded={filtersOpen}
+            onClick={() => setFiltersOpen((v) => !v)}
+            className="sm:hidden cursor-pointer rounded-md border px-3 py-2 text-sm shadow-sm transition hover:bg-black/5 active:scale-[0.98]"
           >
-            {t("materials.filters.clear")}
+            {filtersOpen ? t("materials.filters.hide") : t("materials.filters.toggle")}
           </button>
-          <div className="ml-auto flex items-center gap-2">
-            <label htmlFor="tagsModeSel" className="text-black/70">
-              {t("materials.filters.tagsMode")}
-            </label>
-            <select
-              id="tagsModeSel"
-              className="rounded border px-2 py-1"
-              value={tagsMode}
-              onChange={(e) => setTagsMode(e.target.value === "all" ? "all" : "any")}
+        </div>
+
+        <div className={(filtersOpen ? "block " : "hidden ") + "sm:block origin-top animate-[fadeSlide_.18s_ease-out]"}>
+          <div className="flex flex-col gap-4">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                submitSearch();
+              }}
+              className="flex w-full items-center gap-2 sm:max-w-md"
             >
-              <option value="any">{t("materials.filters.any")}</option>
-              <option value="all">{t("materials.filters.all")}</option>
-            </select>
+              <label htmlFor="searchBox" className="sr-only">
+                {t("materials.filters.search")}
+              </label>
+              <input
+                id="searchBox"
+                className="w-full rounded-md border px-3 py-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+                placeholder={t("materials.filters.searchPlaceholder")}
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+              />
+              <button className="cursor-pointer rounded-md border px-3 py-2 text-sm transition hover:shadow-sm hover:bg-black/5 active:scale-[0.98]">
+                {t("materials.filters.searchBtn")}
+              </button>
+            </form>
+
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+              <label className="text-black/70" htmlFor="typeFilter">
+                {t("materials.filters.type")}
+              </label>
+              <select
+                id="typeFilter"
+                className="w-full rounded-md border px-3 py-2 sm:w-64"
+                value={type || ""}
+                onChange={(e) => setType((e.target.value as MaterialType) || "")}
+              >
+                <option value="">{t("materials.filters.allTypes")}</option>
+                <option value="grammar">{t("materials.filters.grammar")}</option>
+                <option value="vocabulary">{t("materials.filters.vocabulary")}</option>
+                <option value="other">{t("materials.filters.other")}</option>
+              </select>
+            </div>
+
+            {tagsOptions.length > 0 && (
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2 text-black/70">{t("materials.filters.tags")}</div>
+                <div className="flex flex-wrap items-center gap-2">
+                  {tagsOptions.map((tag) => {
+                    const active = selectedTags.includes(tag);
+                    return (
+                      <button
+                        key={tag}
+                        type="button"
+                        onClick={() => toggleTag(tag)}
+                        className={
+                          "cursor-pointer rounded-full border px-3 py-1 text-xs transition " +
+                          (active
+                            ? "bg-gradient-to-r from-lime-200 via-cyan-200 to-violet-200 shadow-sm"
+                            : "hover:bg-black/5")
+                        }
+                      >
+                        {tag}
+                      </button>
+                    );
+                  })}
+                  <button
+                    type="button"
+                    onClick={clearTags}
+                    className="ml-1 cursor-pointer rounded-md border px-3 py-1.5 text-sm transition hover:bg-black/5 active:scale-[0.98]"
+                  >
+                    {t("materials.filters.clear")}
+                  </button>
+                </div>
+                <div className="flex items-center gap-2 sm:self-end">
+                  <label htmlFor="tagsModeSel" className="text-black/70">
+                    {t("materials.filters.tagsMode")}
+                  </label>
+                  <select
+                    id="tagsModeSel"
+                    className="rounded-md border px-3 py-1.5 sm:w-44"
+                    value={tagsMode}
+                    onChange={(e) => setTagsMode(e.target.value === "all" ? "all" : "any")}
+                  >
+                    <option value="any">{t("materials.filters.any")}</option>
+                    <option value="all">{t("materials.filters.all")}</option>
+                  </select>
+                </div>
+              </div>
+            )}
+
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+                <label className="text-black/70" htmlFor="sortBy">
+                  {t("materials.sort.by")}
+                </label>
+                <select
+                  id="sortBy"
+                  className="w-full rounded-md border px-3 py-2 sm:w-56"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as "createdAt" | "updatedAt" | "order" | "title")}
+                >
+                  <option value="createdAt">{t("materials.sort.createdAt")}</option>
+                  <option value="updatedAt">{t("materials.sort.updatedAt")}</option>
+                  <option value="order">{t("materials.sort.order")}</option>
+                  <option value="title">{t("materials.sort.title")}</option>
+                </select>
+              </div>
+
+              <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+                <label className="text-black/70" htmlFor="sortDir">
+                  {t("materials.sort.direction")}
+                </label>
+                <select
+                  id="sortDir"
+                  className="w-full rounded-md border px-3 py-2 sm:w-44"
+                  value={sortDir}
+                  onChange={(e) => setSortDir(e.target.value === "asc" ? "asc" : "desc")}
+                >
+                  <option value="desc">{t("materials.sort.desc")}</option>
+                  <option value="asc">{t("materials.sort.asc")}</option>
+                </select>
+              </div>
+
+              <div className="flex min-w-0 flex-col gap-1 sm:ml-auto sm:flex-row sm:items-center sm:gap-2">
+                <label className="text-black/70" htmlFor="limitSel">
+                  {t("materials.filters.limit")}
+                </label>
+                <select
+                  id="limitSel"
+                  className="w-full rounded-md border px-3 py-2 sm:w-24"
+                  value={limit}
+                  onChange={(e) => setLimit(parseInt(e.target.value, 10))}
+                >
+                  {[10, 20, 50].map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
           </div>
         </div>
-      )}
 
-      {!data && !error && (
-        <div className="h-2 w-24 animate-pulse rounded bg-gradient-to-r from-lime-200 via-cyan-200 to-violet-200" />
-      )}
+        {!data && !error && (
+          <div className="mt-4 h-2 w-24 animate-pulse rounded bg-gradient-to-r from-lime-200 via-cyan-200 to-violet-200" />
+        )}
 
-      {error && (
-        <p className="rounded border border-red-300 bg-red-50 p-3 text-sm text-red-700">{error}</p>
-      )}
+        {error && (
+          <p className="mt-4 rounded-md border border-red-300 bg-red-50 p-3 text-sm text-red-700">{error}</p>
+        )}
 
-      {data && data.items.length === 0 && (
-        <p className="text-black/70">{t("materials.empty")}</p>
-      )}
+        {data && data.items.length === 0 && (
+          <p className="mt-4 text-black/70">{t("materials.empty")}</p>
+        )}
 
-      {data && data.items.length > 0 && (
-        <>
-          <ul className="grid gap-3">
+        {data && data.items.length > 0 && (
+          <div className="mt-4 grid gap-3">
             {data.items.map((m) => (
-              <li key={m._id} className="rounded border p-4">
-                <div className="flex flex-wrap items-center justify-between gap-2">
+              <div
+                key={m._id}
+                className="group rounded-xl border bg-white/80 p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <Link
                       to={`/materials/${m.type}/${m.slug}`}
-                      className="text-lg font-medium underline decoration-transparent underline-offset-2 hover:decoration-inherit"
+                      className="text-lg font-medium transition hover:opacity-90"
                     >
                       {m.title}
                     </Link>
-                    <div className="mt-1 flex items-center gap-2 text-xs text-black/60">
+                    <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-black/60">
                       <span className="rounded border px-2 py-0.5">{m.type}</span>
                       <span className="rounded border px-2 py-0.5">{m.kind}</span>
                       <span
@@ -339,18 +365,15 @@ export default function MaterialsList() {
                           "ml-1 inline-block h-2 w-2 rounded-full " +
                           (m.isPublished ? "bg-emerald-500" : "bg-black/30")
                         }
-                        title={
-                          m.isPublished ? t("materials.state.published") : t("materials.state.draft")
-                        }
-                        aria-label={
-                          m.isPublished ? t("materials.state.published") : t("materials.state.draft")
-                        }
+                        title={m.isPublished ? t("materials.state.published") : t("materials.state.draft")}
+                        aria-label={m.isPublished ? t("materials.state.published") : t("materials.state.draft")}
                       />
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
+
+                  <div className="flex items-center gap-2 sm:justify-end">
                     {m.tags?.length ? (
-                      <div className="hidden md:flex flex-wrap gap-1">
+                      <div className="hidden flex-wrap gap-1 sm:flex">
                         {m.tags.slice(0, 6).map((t) => (
                           <span
                             key={t}
@@ -363,19 +386,21 @@ export default function MaterialsList() {
                     ) : null}
                     <Link
                       to={`/materials/${m.type}/${m.slug}`}
-                      className="rounded border px-2 py-1 text-xs hover:bg-black/5"
+                      className="cursor-pointer rounded-md border px-3 py-2 text-xs transition hover:shadow-sm hover:bg-black/5 active:scale-[0.98]"
                     >
                       {t("materials.open")}
                     </Link>
                   </div>
                 </div>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
+        )}
 
-          <div className="mt-4 flex items-center justify-between gap-3">
+        {data && (
+          <div className="mt-6 flex items-center justify-between gap-3">
             <button
-              className="rounded border px-3 py-1 text-sm disabled:opacity-50 hover:bg-black/5"
+              className="cursor-pointer rounded-md border px-3 py-2 text-sm disabled:opacity-50 transition hover:shadow-sm hover:bg-black/5 active:scale-[0.98]"
               onClick={() => canPrev && setPage(page - 1)}
               disabled={!canPrev}
             >
@@ -386,15 +411,19 @@ export default function MaterialsList() {
               {t("materials.pagination.total", { count: data.total })}
             </div>
             <button
-              className="rounded border px-3 py-1 text-sm disabled:opacity-50 hover:bg-black/5"
+              className="cursor-pointer rounded-md border px-3 py-2 text-sm disabled:opacity-50 transition hover:shadow-sm hover:bg-black/5 active:scale-[0.98]"
               onClick={() => canNext && setPage(page + 1)}
               disabled={!canNext}
             >
               {t("materials.pagination.next")}
             </button>
           </div>
-        </>
-      )}
+        )}
+      </div>
+
+      <style>
+        {`@keyframes fadeSlide{0%{opacity:0;transform:translateY(-4px)}100%{opacity:1;transform:translateY(0)}}`}
+      </style>
     </div>
   );
 }

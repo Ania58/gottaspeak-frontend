@@ -37,7 +37,9 @@
       "clear": "Clear",
       "tagsMode": "Match mode",
       "any": "Any",
-      "all": "All"
+      "all": "All",
+      "toggle": "Filters", 
+      "hide": "Hide filters"
     },
     "sort": {
       "by": "Sort by",

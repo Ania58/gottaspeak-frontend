@@ -38,7 +38,9 @@
       "clear": "Wyczyść",
       "tagsMode": "Tryb dopasowania",
       "any": "Dowolny",
-      "all": "Wszystkie"
+      "all": "Wszystkie",
+      "toggle": "Filtry", 
+      "hide": "Ukryj filtry"
     },
     "sort": {
       "by": "Sortuj wg",
