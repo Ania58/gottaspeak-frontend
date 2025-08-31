@@ -28,7 +28,18 @@
       "allTypes": "Todos los tipos",
       "grammar": "Gramática",
       "vocabulary": "Vocabulario",
-      "other": "Otro"
+      "other": "Otro",
+      "limit": "Por página"
+    },
+     "sort": {
+      "by": "Ordenar por",
+      "direction": "Dirección",
+      "createdAt": "Fecha de creación",
+      "updatedAt": "Última actualización",
+      "order": "Orden",
+      "title": "Título",
+      "asc": "Ascendente",
+      "desc": "Descendente"
     }
   }
 }

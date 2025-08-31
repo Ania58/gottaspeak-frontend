@@ -29,7 +29,18 @@
       "allTypes": "Wszystkie typy",
       "grammar": "Gramatyka",
       "vocabulary": "Słownictwo",
-      "other": "Inne"
+      "other": "Inne",
+      "limit": "Na stronę"
+    },
+    "sort": {
+      "by": "Sortuj wg",
+      "direction": "Kierunek",
+      "createdAt": "Data utworzenia",
+      "updatedAt": "Ostatnia aktualizacja",
+      "order": "Kolejność",
+      "title": "Tytuł",
+      "asc": "Rosnąco",
+      "desc": "Malejąco"
     }
   }
 }

@@ -28,7 +28,18 @@
       "allTypes": "All types",
       "grammar": "Grammar",
       "vocabulary": "Vocabulary",
-      "other": "Other"
+      "other": "Other",
+      "limit": "Per page"
+    },
+    "sort": {
+      "by": "Sort by",
+      "direction": "Direction",
+      "createdAt": "Date created",
+      "updatedAt": "Last updated",
+      "order": "Order",
+      "title": "Title",
+      "asc": "Ascending",
+      "desc": "Descending"
     }
   }
 }

@@ -33,13 +33,23 @@ export default function MaterialsList() {
   const [sp, setSp] = useSearchParams();
 
   const page = Math.max(1, parseInt(sp.get("page") || "1", 10));
-  const limit = Math.max(1, parseInt(sp.get("limit") || "20", 10));
+  const rawLimit = parseInt(sp.get("limit") || "20", 10);
+  const limit = Number.isFinite(rawLimit) && rawLimit > 0 ? rawLimit : 20;
 
   const rawType = (sp.get("type") || "") as string;
   const type: "" | MaterialType =
     rawType === "grammar" || rawType === "vocabulary" || rawType === "other"
       ? (rawType as MaterialType)
       : "";
+
+  const sortBy = ((): "createdAt" | "updatedAt" | "order" | "title" => {
+    const v = sp.get("sortBy") || "createdAt";
+    return (["createdAt", "updatedAt", "order", "title"] as const).includes(v as any)
+      ? (v as any)
+      : "createdAt";
+  })();
+
+  const sortDir = sp.get("sortDir") === "asc" ? "asc" : "desc";
 
   const [data, setData] = useState<Paginated<Material> | null>(null);
   const [error, setError] = useState("");
@@ -49,8 +59,8 @@ export default function MaterialsList() {
     const params = new URLSearchParams({
       page: String(page),
       limit: String(limit),
-      sortBy: "createdAt",
-      sortDir: "desc",
+      sortBy,
+      sortDir,
     });
     if (type) params.set("type", type);
 
@@ -67,19 +77,35 @@ export default function MaterialsList() {
         if (e.name !== "AbortError") setError(String(e.message || e));
       });
     return () => ac.abort();
-  }, [page, limit, type]);
+  }, [page, limit, type, sortBy, sortDir]);
 
   function setPage(next: number) {
     const s = new URLSearchParams(sp);
     s.set("page", String(next));
-    if (!s.get("limit")) s.set("limit", String(limit));
     setSp(s, { replace: true });
   }
-
   function setType(next: "" | MaterialType) {
     const s = new URLSearchParams(sp);
     if (next) s.set("type", next);
     else s.delete("type");
+    s.set("page", "1"); 
+    setSp(s, { replace: true });
+  }
+  function setLimit(next: number) {
+    const s = new URLSearchParams(sp);
+    s.set("limit", String(next));
+    s.set("page", "1"); 
+    setSp(s, { replace: true });
+  }
+  function setSortBy(next: "createdAt" | "updatedAt" | "order" | "title") {
+    const s = new URLSearchParams(sp);
+    s.set("sortBy", next);
+    s.set("page", "1");
+    setSp(s, { replace: true });
+  }
+  function setSortDir(next: "asc" | "desc") {
+    const s = new URLSearchParams(sp);
+    s.set("sortDir", next);
     s.set("page", "1");
     setSp(s, { replace: true });
   }
@@ -92,8 +118,7 @@ export default function MaterialsList() {
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-semibold">{t("nav.materials")}</h1>
 
-        {/* Filtr typu */}
-        <div className="flex items-center gap-2 text-sm">
+        <div className="flex flex-wrap items-center gap-3 text-sm">
           <label className="text-black/70" htmlFor="typeFilter">
             {t("materials.filters.type")}
           </label>
@@ -101,14 +126,58 @@ export default function MaterialsList() {
             id="typeFilter"
             className="rounded border px-2 py-1"
             value={type || ""}
-            onChange={(e) =>
-              setType((e.target.value as MaterialType) || "")
-            }
+            onChange={(e) => setType((e.target.value as MaterialType) || "")}
           >
             <option value="">{t("materials.filters.allTypes")}</option>
             <option value="grammar">{t("materials.filters.grammar")}</option>
             <option value="vocabulary">{t("materials.filters.vocabulary")}</option>
             <option value="other">{t("materials.filters.other")}</option>
+          </select>
+
+          <label className="ml-2 text-black/70" htmlFor="sortBy">
+            {t("materials.sort.by")}
+          </label>
+          <select
+            id="sortBy"
+            className="rounded border px-2 py-1"
+            value={sortBy}
+            onChange={(e) =>
+              setSortBy(e.target.value as "createdAt" | "updatedAt" | "order" | "title")
+            }
+          >
+            <option value="createdAt">{t("materials.sort.createdAt")}</option>
+            <option value="updatedAt">{t("materials.sort.updatedAt")}</option>
+            <option value="order">{t("materials.sort.order")}</option>
+            <option value="title">{t("materials.sort.title")}</option>
+          </select>
+
+          <label className="ml-1 text-black/70" htmlFor="sortDir">
+            {t("materials.sort.direction")}
+          </label>
+          <select
+            id="sortDir"
+            className="rounded border px-2 py-1"
+            value={sortDir}
+            onChange={(e) => setSortDir(e.target.value === "asc" ? "asc" : "desc")}
+          >
+            <option value="desc">{t("materials.sort.desc")}</option>
+            <option value="asc">{t("materials.sort.asc")}</option>
+          </select>
+
+          <label className="ml-2 text-black/70" htmlFor="limitSel">
+            {t("materials.filters.limit")}
+          </label>
+          <select
+            id="limitSel"
+            className="rounded border px-2 py-1"
+            value={limit}
+            onChange={(e) => setLimit(parseInt(e.target.value, 10))}
+          >
+            {[10, 20, 50].map((n) => (
+              <option key={n} value={n}>
+                {n}
+              </option>
+            ))}
           </select>
         </div>
       </div>
@@ -118,9 +187,7 @@ export default function MaterialsList() {
       )}
 
       {error && (
-        <p className="rounded border border-red-300 bg-red-50 p-3 text-sm text-red-700">
-          {error}
-        </p>
+        <p className="rounded border border-red-300 bg-red-50 p-3 text-sm text-red-700">{error}</p>
       )}
 
       {data && data.items.length === 0 && (
@@ -149,8 +216,12 @@ export default function MaterialsList() {
                           "ml-1 inline-block h-2 w-2 rounded-full " +
                           (m.isPublished ? "bg-emerald-500" : "bg-black/30")
                         }
-                        title={m.isPublished ? t("materials.state.published") : t("materials.state.draft")}
-                        aria-label={m.isPublished ? t("materials.state.published") : t("materials.state.draft")}
+                        title={
+                          m.isPublished ? t("materials.state.published") : t("materials.state.draft")
+                        }
+                        aria-label={
+                          m.isPublished ? t("materials.state.published") : t("materials.state.draft")
+                        }
                       />
                     </div>
                   </div>
@@ -191,7 +262,8 @@ export default function MaterialsList() {
             </button>
 
             <div className="text-sm text-black/70">
-              {t("materials.pagination.pageOf", { page: data.page, total: data.totalPages })} • {t("materials.pagination.total", { count: data.total })}
+              {t("materials.pagination.pageOf", { page: data.page, total: data.totalPages })} •{" "}
+              {t("materials.pagination.total", { count: data.total })}
             </div>
 
             <button
@@ -207,6 +279,7 @@ export default function MaterialsList() {
     </div>
   );
 }
+
 
 
 
