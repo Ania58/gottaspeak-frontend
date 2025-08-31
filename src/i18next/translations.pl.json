@@ -9,5 +9,14 @@
   "common": {
     "home": "Strona główna",
     "notFound": "Nie znaleziono"
+  },
+
+  "materials": {
+    "open": "Otwórz",
+    "empty": "Brak materiałów do wyświetlenia.",
+    "state": {
+      "published": "Opublikowany",
+      "draft": "Szkic"
+    }
   }
 }

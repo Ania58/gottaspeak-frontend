@@ -9,5 +9,13 @@
   "common": {
     "home": "Inicio",
     "notFound": "No encontrado"
+  },
+   "materials": {
+    "open": "Abrir",
+    "empty": "No hay materiales para mostrar.",
+    "state": {
+      "published": "Publicado",
+      "draft": "Borrador"
+    }
   }
 }

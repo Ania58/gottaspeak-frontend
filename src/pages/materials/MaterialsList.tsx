@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom"; 
 
 type MaterialType = "grammar" | "vocabulary" | "other";
 type MaterialKind = "lesson" | "exercise" | "quiz";
@@ -66,30 +67,59 @@ export default function MaterialsList() {
         </p>
       )}
 
-      {data && (
+      {data && data.items.length === 0 && (
+        <p className="text-black/70">{t("materials.empty")}</p>
+      )}
+
+      {data && data.items.length > 0 && (
         <>
           <ul className="grid gap-3">
             {data.items.map((m) => (
               <li key={m._id} className="rounded border p-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
-                    <div className="text-lg font-medium">{m.title}</div>
-                    <div className="mt-1 text-xs text-black/60">
-                      {m.type} • {m.kind} {m.isPublished ? "• published" : "• draft"}
+                    <Link
+                      to={`/materials/${m.type}/${m.slug}`}
+                      className="text-lg font-medium underline decoration-transparent underline-offset-2 hover:decoration-inherit"
+                    >
+                      {m.title}
+                    </Link>
+
+                    <div className="mt-1 flex items-center gap-2 text-xs text-black/60">
+                      <span className="rounded border px-2 py-0.5">{m.type}</span>
+                      <span className="rounded border px-2 py-0.5">{m.kind}</span>
+                      <span
+                        className={
+                          "ml-1 inline-block h-2 w-2 rounded-full " +
+                          (m.isPublished ? "bg-emerald-500" : "bg-black/30")
+                        }
+                        title={m.isPublished ? t("materials.state.published") : t("materials.state.draft")}
+                        aria-label={m.isPublished ? t("materials.state.published") : t("materials.state.draft")}
+                      />
                     </div>
                   </div>
-                  {m.tags?.length ? (
-                    <div className="flex flex-wrap gap-1">
-                      {m.tags.slice(0, 6).map((t) => (
-                        <span
-                          key={t}
-                          className="rounded bg-gradient-to-r from-lime-100 to-cyan-100 px-2 py-1 text-xs"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  ) : null}
+
+                  <div className="flex items-center gap-2">
+                    {m.tags?.length ? (
+                      <div className="hidden md:flex flex-wrap gap-1">
+                        {m.tags.slice(0, 6).map((t) => (
+                          <span
+                            key={t}
+                            className="rounded bg-gradient-to-r from-lime-100 to-cyan-100 px-2 py-1 text-xs"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
+
+                    <Link
+                      to={`/materials/${m.type}/${m.slug}`}
+                      className="rounded border px-2 py-1 text-xs hover:bg-black/5"
+                    >
+                      {t("materials.open")}
+                    </Link>
+                  </div>
                 </div>
               </li>
             ))}
@@ -103,3 +133,4 @@ export default function MaterialsList() {
     </div>
   );
 }
+
