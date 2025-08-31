@@ -1,8 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { changeLanguage } from "../i18next/index.ts";
 
 export default function Header() {
-  const { t } = useTranslation(); 
+  const { t, i18n } = useTranslation();
+  const current = (i18n.language || "en").split("-")[0];
+
+  const langs = [
+    { code: "pl", label: "PL" },
+    { code: "en", label: "EN" },
+    { code: "es", label: "ES" },
+  ] as const;
 
   return (
     <header className="border-b">
@@ -14,30 +22,55 @@ export default function Header() {
           {t("appName")}
         </Link>
 
-        <nav className="flex items-center gap-4 text-sm">
-          <NavLink
-            to="/materials"
-            className={({ isActive }) =>
-              (isActive ? "font-semibold underline " : "hover:underline ") +
-              "transition-colors"
-            }
-          >
-            {t("nav.materials")}
-          </NavLink>
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              (isActive ? "font-semibold underline " : "hover:underline ") +
-              "transition-colors"
-            }
-          >
-            {t("nav.contact")}
-          </NavLink>
-        </nav>
+        <div className="flex items-center gap-4">
+          <nav className="flex items-center gap-4 text-sm">
+            <NavLink
+              to="/materials"
+              className={({ isActive }) =>
+                (isActive ? "font-semibold underline " : "hover:underline ") +
+                "transition-colors"
+              }
+            >
+              {t("nav.materials")}
+            </NavLink>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                (isActive ? "font-semibold underline " : "hover:underline ") +
+                "transition-colors"
+              }
+            >
+              {t("nav.contact")}
+            </NavLink>
+          </nav>
+
+          <div className="flex items-center gap-1" aria-label={t("language")}>
+            {langs.map(({ code, label }) => {
+              const active = current === code;
+              return (
+                <button
+                  key={code}
+                  type="button"
+                  onClick={() => changeLanguage(code)}
+                  className={
+                    "rounded px-2 py-1 text-xs border transition cursor-pointer " +
+                    (active
+                      ? "text-white bg-gradient-to-r from-lime-500 via-emerald-500 to-cyan-500 cursor-pointer"
+                      : "border-black/20 hover:bg-black/5 cursor-pointer")
+                  }
+                  aria-pressed={active}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       <div className="h-1 bg-gradient-to-r from-lime-500 via-emerald-500 to-cyan-500" />
     </header>
   );
 }
+
 
