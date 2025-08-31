@@ -51,6 +51,10 @@ export default function MaterialsList() {
 
   const sortDir = sp.get("sortDir") === "asc" ? "asc" : "desc";
 
+  const search = sp.get("search") || ""; 
+  const [q, setQ] = useState(search);
+  useEffect(() => setQ(search), [search]); 
+
   const [data, setData] = useState<Paginated<Material> | null>(null);
   const [error, setError] = useState("");
 
@@ -63,6 +67,7 @@ export default function MaterialsList() {
       sortDir,
     });
     if (type) params.set("type", type);
+    if (search) params.set("search", search); 
 
     fetch(`${API_URL}/materials?${params.toString()}`, { signal: ac.signal })
       .then(async (r) => {
@@ -77,8 +82,9 @@ export default function MaterialsList() {
         if (e.name !== "AbortError") setError(String(e.message || e));
       });
     return () => ac.abort();
-  }, [page, limit, type, sortBy, sortDir]);
+  }, [page, limit, type, sortBy, sortDir, search]); 
 
+  // helpers to write URL
   function setPage(next: number) {
     const s = new URLSearchParams(sp);
     s.set("page", String(next));
@@ -119,6 +125,32 @@ export default function MaterialsList() {
         <h1 className="text-2xl font-semibold">{t("nav.materials")}</h1>
 
         <div className="flex flex-wrap items-center gap-3 text-sm">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const s = new URLSearchParams(sp);
+              if (q.trim()) s.set("search", q.trim());
+              else s.delete("search");
+              s.set("page", "1");
+              setSp(s, { replace: true });
+            }}
+            className="flex items-center gap-2"
+          >
+            <label htmlFor="searchBox" className="sr-only">
+              {t("materials.filters.search")}
+            </label>
+            <input
+              id="searchBox"
+              className="rounded border px-2 py-1"
+              placeholder={t("materials.filters.searchPlaceholder")}
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+            />
+            <button className="rounded border px-2 py-1 hover:bg-black/5">
+              {t("materials.filters.searchBtn")}
+            </button>
+          </form>
+
           <label className="text-black/70" htmlFor="typeFilter">
             {t("materials.filters.type")}
           </label>
@@ -279,6 +311,7 @@ export default function MaterialsList() {
     </div>
   );
 }
+
 
 
 

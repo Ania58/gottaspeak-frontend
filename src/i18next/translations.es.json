@@ -29,7 +29,10 @@
       "grammar": "Gramática",
       "vocabulary": "Vocabulario",
       "other": "Otro",
-      "limit": "Por página"
+      "limit": "Por página",
+      "search": "Buscar",
+      "searchPlaceholder": "Escribe el título…",
+      "searchBtn": "Buscar"
     },
      "sort": {
       "by": "Ordenar por",
