@@ -30,9 +30,16 @@ const API_URL =
 
 export default function MaterialsList() {
   const { t } = useTranslation();
-  const [sp, setSp] = useSearchParams(); 
+  const [sp, setSp] = useSearchParams();
+
   const page = Math.max(1, parseInt(sp.get("page") || "1", 10));
-  const limit = Math.max(1, parseInt(sp.get("limit") || "20", 10)); 
+  const limit = Math.max(1, parseInt(sp.get("limit") || "20", 10));
+
+  const rawType = (sp.get("type") || "") as string;
+  const type: "" | MaterialType =
+    rawType === "grammar" || rawType === "vocabulary" || rawType === "other"
+      ? (rawType as MaterialType)
+      : "";
 
   const [data, setData] = useState<Paginated<Material> | null>(null);
   const [error, setError] = useState("");
@@ -45,6 +52,8 @@ export default function MaterialsList() {
       sortBy: "createdAt",
       sortDir: "desc",
     });
+    if (type) params.set("type", type);
+
     fetch(`${API_URL}/materials?${params.toString()}`, { signal: ac.signal })
       .then(async (r) => {
         if (!r.ok) {
@@ -58,7 +67,7 @@ export default function MaterialsList() {
         if (e.name !== "AbortError") setError(String(e.message || e));
       });
     return () => ac.abort();
-  }, [page, limit]); 
+  }, [page, limit, type]);
 
   function setPage(next: number) {
     const s = new URLSearchParams(sp);
@@ -67,14 +76,42 @@ export default function MaterialsList() {
     setSp(s, { replace: true });
   }
 
+  function setType(next: "" | MaterialType) {
+    const s = new URLSearchParams(sp);
+    if (next) s.set("type", next);
+    else s.delete("type");
+    s.set("page", "1");
+    setSp(s, { replace: true });
+  }
+
   const canPrev = page > 1;
   const canNext = !!data && page < data.totalPages;
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6">
-      <h1 className="mb-4 text-2xl font-semibold">
-        {t("nav.materials")}
-      </h1>
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-2xl font-semibold">{t("nav.materials")}</h1>
+
+        {/* Filtr typu */}
+        <div className="flex items-center gap-2 text-sm">
+          <label className="text-black/70" htmlFor="typeFilter">
+            {t("materials.filters.type")}
+          </label>
+          <select
+            id="typeFilter"
+            className="rounded border px-2 py-1"
+            value={type || ""}
+            onChange={(e) =>
+              setType((e.target.value as MaterialType) || "")
+            }
+          >
+            <option value="">{t("materials.filters.allTypes")}</option>
+            <option value="grammar">{t("materials.filters.grammar")}</option>
+            <option value="vocabulary">{t("materials.filters.vocabulary")}</option>
+            <option value="other">{t("materials.filters.other")}</option>
+          </select>
+        </div>
+      </div>
 
       {!data && !error && (
         <div className="h-2 w-24 animate-pulse rounded bg-gradient-to-r from-lime-200 via-cyan-200 to-violet-200" />
@@ -170,5 +207,6 @@ export default function MaterialsList() {
     </div>
   );
 }
+
 
 

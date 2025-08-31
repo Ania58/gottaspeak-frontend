@@ -23,6 +23,13 @@
       "next": "Następna",
       "pageOf": "Strona {{page}} z {{total}}",
       "total": "Łącznie: {{count}}"
+    },
+    "filters": {
+      "type": "Typ",
+      "allTypes": "Wszystkie typy",
+      "grammar": "Gramatyka",
+      "vocabulary": "Słownictwo",
+      "other": "Inne"
     }
   }
 }
