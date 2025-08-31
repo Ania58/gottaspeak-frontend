@@ -13,7 +13,12 @@ export default function Header() {
   ] as const;
 
   return (
-    <header className="border-b">
+    <header
+      className="
+        sticky top-0 z-50 border-b shadow-sm
+        bg-gradient-to-b from-lime-100/60 via-cyan-50/50 to-violet-100/60
+      "
+    >
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
         <Link
           to="/"
@@ -28,7 +33,7 @@ export default function Header() {
               to="/materials"
               className={({ isActive }) =>
                 (isActive ? "font-semibold underline " : "hover:underline ") +
-                "transition-colors"
+                "text-black/80 transition-colors"
               }
             >
               {t("nav.materials")}
@@ -37,26 +42,26 @@ export default function Header() {
               to="/contact"
               className={({ isActive }) =>
                 (isActive ? "font-semibold underline " : "hover:underline ") +
-                "transition-colors"
+                "text-black/80 transition-colors"
               }
             >
               {t("nav.contact")}
             </NavLink>
           </nav>
 
-          <div className="flex items-center gap-1" aria-label={t("language")}>
+          <div className="flex items-center gap-1">
             {langs.map(({ code, label }) => {
               const active = current === code;
               return (
                 <button
                   key={code}
                   type="button"
-                  onClick={() => changeLanguage(code)}
+                  onClick={() => changeLanguage(code as any)}
                   className={
                     "rounded px-2 py-1 text-xs border transition cursor-pointer " +
                     (active
                       ? "text-white bg-gradient-to-r from-lime-500 via-emerald-500 to-cyan-500 cursor-pointer"
-                      : "border-black/20 hover:bg-black/5 cursor-pointer")
+                      : "border-black/20 text-black/70 hover:bg-black/5 cursor-pointer")
                   }
                   aria-pressed={active}
                 >
@@ -68,9 +73,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="h-1 bg-gradient-to-r from-lime-500 via-emerald-500 to-cyan-500" />
+      <div className="h-[2px] bg-gradient-to-r from-lime-500 via-emerald-500 to-cyan-500" />
     </header>
   );
 }
-
-
