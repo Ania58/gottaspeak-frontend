@@ -32,7 +32,12 @@
       "limit": "Per page",
       "search": "Search",
       "searchPlaceholder": "Type a title…",
-      "searchBtn": "Search"
+      "searchBtn": "Search",
+      "tags": "Tags",
+      "clear": "Clear",
+      "tagsMode": "Match mode",
+      "any": "Any",
+      "all": "All"
     },
     "sort": {
       "by": "Sort by",

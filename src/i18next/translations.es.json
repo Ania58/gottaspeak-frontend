@@ -32,7 +32,12 @@
       "limit": "Por página",
       "search": "Buscar",
       "searchPlaceholder": "Escribe el título…",
-      "searchBtn": "Buscar"
+      "searchBtn": "Buscar",
+      "tags": "Etiquetas",
+      "clear": "Limpiar",
+      "tagsMode": "Modo de coincidencia",
+      "any": "Cualquiera",
+      "all": "Todos"
     },
      "sort": {
       "by": "Ordenar por",

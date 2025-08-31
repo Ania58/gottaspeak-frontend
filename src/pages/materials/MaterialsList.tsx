@@ -51,12 +51,33 @@ export default function MaterialsList() {
 
   const sortDir = sp.get("sortDir") === "asc" ? "asc" : "desc";
 
-  const search = sp.get("search") || ""; 
+  const search = sp.get("search") || "";
   const [q, setQ] = useState(search);
-  useEffect(() => setQ(search), [search]); 
+  useEffect(() => setQ(search), [search]);
+
+  const selectedTags = (sp.get("tags") || "")
+    .split(",")
+    .map(s => s.trim())
+    .filter(Boolean);
+  const tagsMode: "any" | "all" = sp.get("tagsMode") === "all" ? "all" : "any";
 
   const [data, setData] = useState<Paginated<Material> | null>(null);
   const [error, setError] = useState("");
+  const [tagsOptions, setTagsOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    const ac = new AbortController();
+    const params = new URLSearchParams();
+    if (type) params.set("type", type);
+    const url = params.toString()
+      ? `${API_URL}/materials/tags?${params.toString()}`
+      : `${API_URL}/materials/tags`;
+    fetch(url, { signal: ac.signal })
+      .then(r => r.json() as Promise<{ tags: string[] }>)
+      .then(({ tags }) => setTagsOptions(tags || []))
+      .catch(() => {});
+    return () => ac.abort();
+  }, [type]);
 
   useEffect(() => {
     const ac = new AbortController();
@@ -67,8 +88,9 @@ export default function MaterialsList() {
       sortDir,
     });
     if (type) params.set("type", type);
-    if (search) params.set("search", search); 
-
+    if (search) params.set("search", search);
+    if (selectedTags.length) params.set("tags", selectedTags.join(","));
+    if (selectedTags.length) params.set("tagsMode", tagsMode);
     fetch(`${API_URL}/materials?${params.toString()}`, { signal: ac.signal })
       .then(async (r) => {
         if (!r.ok) {
@@ -82,9 +104,8 @@ export default function MaterialsList() {
         if (e.name !== "AbortError") setError(String(e.message || e));
       });
     return () => ac.abort();
-  }, [page, limit, type, sortBy, sortDir, search]); 
+  }, [page, limit, type, sortBy, sortDir, search, selectedTags.join(","), tagsMode]);
 
-  // helpers to write URL
   function setPage(next: number) {
     const s = new URLSearchParams(sp);
     s.set("page", String(next));
@@ -94,13 +115,13 @@ export default function MaterialsList() {
     const s = new URLSearchParams(sp);
     if (next) s.set("type", next);
     else s.delete("type");
-    s.set("page", "1"); 
+    s.set("page", "1");
     setSp(s, { replace: true });
   }
   function setLimit(next: number) {
     const s = new URLSearchParams(sp);
     s.set("limit", String(next));
-    s.set("page", "1"); 
+    s.set("page", "1");
     setSp(s, { replace: true });
   }
   function setSortBy(next: "createdAt" | "updatedAt" | "order" | "title") {
@@ -115,6 +136,35 @@ export default function MaterialsList() {
     s.set("page", "1");
     setSp(s, { replace: true });
   }
+  function submitSearch() {
+    const s = new URLSearchParams(sp);
+    if (q.trim()) s.set("search", q.trim());
+    else s.delete("search");
+    s.set("page", "1");
+    setSp(s, { replace: true });
+  }
+  function toggleTag(tag: string) {
+    const s = new URLSearchParams(sp);
+    const cur = (s.get("tags") || "").split(",").map(x => x.trim()).filter(Boolean);
+    const has = cur.includes(tag);
+    const next = has ? cur.filter(t => t !== tag) : [...cur, tag];
+    if (next.length) s.set("tags", next.join(","));
+    else s.delete("tags");
+    s.set("page", "1");
+    setSp(s, { replace: true });
+  }
+  function clearTags() {
+    const s = new URLSearchParams(sp);
+    s.delete("tags");
+    s.set("page", "1");
+    setSp(s, { replace: true });
+  }
+  function setTagsMode(next: "any" | "all") {
+    const s = new URLSearchParams(sp);
+    s.set("tagsMode", next);
+    s.set("page", "1");
+    setSp(s, { replace: true });
+  }
 
   const canPrev = page > 1;
   const canNext = !!data && page < data.totalPages;
@@ -123,16 +173,11 @@ export default function MaterialsList() {
     <div className="mx-auto w-full max-w-5xl px-4 py-6">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-semibold">{t("nav.materials")}</h1>
-
         <div className="flex flex-wrap items-center gap-3 text-sm">
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              const s = new URLSearchParams(sp);
-              if (q.trim()) s.set("search", q.trim());
-              else s.delete("search");
-              s.set("page", "1");
-              setSp(s, { replace: true });
+              submitSearch();
             }}
             className="flex items-center gap-2"
           >
@@ -214,6 +259,53 @@ export default function MaterialsList() {
         </div>
       </div>
 
+      {tagsOptions.length > 0 && (
+        <div className="mb-4 flex flex-wrap items-center gap-2 text-sm">
+          <span className="text-black/70">{t("materials.filters.tags")}</span>
+          <div className="flex flex-wrap gap-2">
+            {tagsOptions.map(tag => {
+              const active = selectedTags.includes(tag);
+              return (
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() => toggleTag(tag)}
+                  className={
+                    "rounded border px-2 py-1 " +
+                    (active
+                      ? "bg-gradient-to-r from-lime-200 via-cyan-200 to-violet-200"
+                      : "hover:bg-black/5")
+                  }
+                >
+                  {tag}
+                </button>
+              );
+            })}
+          </div>
+          <button
+            type="button"
+            onClick={clearTags}
+            className="ml-2 rounded border px-2 py-1 hover:bg-black/5"
+          >
+            {t("materials.filters.clear")}
+          </button>
+          <div className="ml-auto flex items-center gap-2">
+            <label htmlFor="tagsModeSel" className="text-black/70">
+              {t("materials.filters.tagsMode")}
+            </label>
+            <select
+              id="tagsModeSel"
+              className="rounded border px-2 py-1"
+              value={tagsMode}
+              onChange={(e) => setTagsMode(e.target.value === "all" ? "all" : "any")}
+            >
+              <option value="any">{t("materials.filters.any")}</option>
+              <option value="all">{t("materials.filters.all")}</option>
+            </select>
+          </div>
+        </div>
+      )}
+
       {!data && !error && (
         <div className="h-2 w-24 animate-pulse rounded bg-gradient-to-r from-lime-200 via-cyan-200 to-violet-200" />
       )}
@@ -239,7 +331,6 @@ export default function MaterialsList() {
                     >
                       {m.title}
                     </Link>
-
                     <div className="mt-1 flex items-center gap-2 text-xs text-black/60">
                       <span className="rounded border px-2 py-0.5">{m.type}</span>
                       <span className="rounded border px-2 py-0.5">{m.kind}</span>
@@ -257,7 +348,6 @@ export default function MaterialsList() {
                       />
                     </div>
                   </div>
-
                   <div className="flex items-center gap-2">
                     {m.tags?.length ? (
                       <div className="hidden md:flex flex-wrap gap-1">
@@ -271,7 +361,6 @@ export default function MaterialsList() {
                         ))}
                       </div>
                     ) : null}
-
                     <Link
                       to={`/materials/${m.type}/${m.slug}`}
                       className="rounded border px-2 py-1 text-xs hover:bg-black/5"
@@ -292,12 +381,10 @@ export default function MaterialsList() {
             >
               {t("materials.pagination.prev")}
             </button>
-
             <div className="text-sm text-black/70">
               {t("materials.pagination.pageOf", { page: data.page, total: data.totalPages })} •{" "}
               {t("materials.pagination.total", { count: data.total })}
             </div>
-
             <button
               className="rounded border px-3 py-1 text-sm disabled:opacity-50 hover:bg-black/5"
               onClick={() => canNext && setPage(page + 1)}
@@ -311,8 +398,3 @@ export default function MaterialsList() {
     </div>
   );
 }
-
-
-
-
-

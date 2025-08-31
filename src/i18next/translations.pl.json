@@ -33,7 +33,12 @@
       "limit": "Na stronę",
       "search": "Szukaj",
       "searchPlaceholder": "Wpisz tytuł…",
-      "searchBtn": "Szukaj"
+      "searchBtn": "Szukaj",
+      "tags": "Tagi",
+      "clear": "Wyczyść",
+      "tagsMode": "Tryb dopasowania",
+      "any": "Dowolny",
+      "all": "Wszystkie"
     },
     "sort": {
       "by": "Sortuj wg",
