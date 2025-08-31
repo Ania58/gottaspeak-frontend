@@ -1,6 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
+  const { t } = useTranslation(); 
+
   return (
     <header className="border-b">
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
@@ -8,7 +11,7 @@ export default function Header() {
           to="/"
           className="text-xl font-semibold bg-gradient-to-r from-lime-500 via-cyan-400 to-violet-500 bg-clip-text text-transparent"
         >
-          GottaSpeak
+          {t("appName")}
         </Link>
 
         <nav className="flex items-center gap-4 text-sm">
@@ -19,7 +22,7 @@ export default function Header() {
               "transition-colors"
             }
           >
-            Materials
+            {t("nav.materials")}
           </NavLink>
           <NavLink
             to="/contact"
@@ -28,7 +31,7 @@ export default function Header() {
               "transition-colors"
             }
           >
-            Contact
+            {t("nav.contact")}
           </NavLink>
         </nav>
       </div>
@@ -37,3 +40,4 @@ export default function Header() {
     </header>
   );
 }
+
