@@ -1,0 +1,13 @@
+{
+  "appName": "GottaSpeak",
+  "language": "Język",
+  "nav": {
+    "materials": "Materiały",
+    "contact": "Kontakt",
+    "joinDemo": "Dołącz (demo)"
+  },
+  "common": {
+    "home": "Strona główna",
+    "notFound": "Nie znaleziono"
+  }
+}

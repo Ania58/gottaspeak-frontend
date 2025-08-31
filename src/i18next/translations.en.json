@@ -1,0 +1,13 @@
+{
+  "appName": "GottaSpeak",
+  "language": "Language",
+  "nav": {
+    "materials": "Materials",
+    "contact": "Contact",
+    "joinDemo": "Join (demo)"
+  },
+  "common": {
+    "home": "Home",
+    "notFound": "Not found"
+  }
+}
