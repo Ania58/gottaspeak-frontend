@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
+import MaterialsList from "./pages/materials/MaterialsList";
+
+
 function App() {
 
   return (
@@ -7,6 +10,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
+          <Route path="materials" element={<MaterialsList />} />
           <Route index element={<div className="p-6">Home</div>} />
         </Routes>
       </Router>
