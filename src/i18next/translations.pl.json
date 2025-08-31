@@ -17,6 +17,12 @@
     "state": {
       "published": "Opublikowany",
       "draft": "Szkic"
+    },
+    "pagination": {
+      "prev": "Poprzednia",
+      "next": "Następna",
+      "pageOf": "Strona {{page}} z {{total}}",
+      "total": "Łącznie: {{count}}"
     }
   }
 }

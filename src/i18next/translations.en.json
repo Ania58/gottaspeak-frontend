@@ -16,6 +16,12 @@
     "state": {
       "published": "Published",
       "draft": "Draft"
+    },
+    "pagination": {
+      "prev": "Previous",
+      "next": "Next",
+      "pageOf": "Page {{page}} of {{total}}",
+      "total": "Total: {{count}}"
     }
   }
 }

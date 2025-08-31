@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom"; 
+import { Link, useSearchParams } from "react-router-dom";
 
 type MaterialType = "grammar" | "vocabulary" | "other";
 type MaterialKind = "lesson" | "exercise" | "quiz";
@@ -30,12 +30,21 @@ const API_URL =
 
 export default function MaterialsList() {
   const { t } = useTranslation();
+  const [sp, setSp] = useSearchParams(); 
+  const page = Math.max(1, parseInt(sp.get("page") || "1", 10));
+  const limit = Math.max(1, parseInt(sp.get("limit") || "20", 10)); 
+
   const [data, setData] = useState<Paginated<Material> | null>(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const ac = new AbortController();
-    const params = new URLSearchParams({ limit: "20", sortBy: "createdAt", sortDir: "desc" });
+    const params = new URLSearchParams({
+      page: String(page),
+      limit: String(limit),
+      sortBy: "createdAt",
+      sortDir: "desc",
+    });
     fetch(`${API_URL}/materials?${params.toString()}`, { signal: ac.signal })
       .then(async (r) => {
         if (!r.ok) {
@@ -49,7 +58,17 @@ export default function MaterialsList() {
         if (e.name !== "AbortError") setError(String(e.message || e));
       });
     return () => ac.abort();
-  }, []);
+  }, [page, limit]); 
+
+  function setPage(next: number) {
+    const s = new URLSearchParams(sp);
+    s.set("page", String(next));
+    if (!s.get("limit")) s.set("limit", String(limit));
+    setSp(s, { replace: true });
+  }
+
+  const canPrev = page > 1;
+  const canNext = !!data && page < data.totalPages;
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6">
@@ -125,12 +144,31 @@ export default function MaterialsList() {
             ))}
           </ul>
 
-          <div className="mt-4 text-sm text-black/60">
-            Page {data.page} / {data.totalPages} • total {data.total}
+          <div className="mt-4 flex items-center justify-between gap-3">
+            <button
+              className="rounded border px-3 py-1 text-sm disabled:opacity-50 hover:bg-black/5"
+              onClick={() => canPrev && setPage(page - 1)}
+              disabled={!canPrev}
+            >
+              {t("materials.pagination.prev")}
+            </button>
+
+            <div className="text-sm text-black/70">
+              {t("materials.pagination.pageOf", { page: data.page, total: data.totalPages })} • {t("materials.pagination.total", { count: data.total })}
+            </div>
+
+            <button
+              className="rounded border px-3 py-1 text-sm disabled:opacity-50 hover:bg-black/5"
+              onClick={() => canNext && setPage(page + 1)}
+              disabled={!canNext}
+            >
+              {t("materials.pagination.next")}
+            </button>
           </div>
         </>
       )}
     </div>
   );
 }
+
 
