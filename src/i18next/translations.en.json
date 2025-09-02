@@ -51,5 +51,30 @@
       "asc": "Ascending",
       "desc": "Descending"
     }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Have a question or need help? Send us a message.",
+    "name": "Full name",
+    "email": "Email address",
+    "subject": "Subject (optional)",
+    "message": "Message",
+    "send": "Send message",
+    "sending": "Sending…",
+    "clear": "Clear",
+    "success": "Thanks! We’ll get back to you as soon as possible.",
+    "error": "Something went wrong",
+    "placeholders": {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "subject": "Short subject",
+      "message": "Describe your question or issue…"
+    },
+    "errors": {
+      "name": "Please enter your name.",
+      "email": "Please enter a valid email address.",
+      "message": "Message must be at least 3 characters."
+    },
+    "counter": "{{n}} / {{max}} characters"
   }
 }

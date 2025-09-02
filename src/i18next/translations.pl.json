@@ -52,5 +52,30 @@
       "asc": "Rosnąco",
       "desc": "Malejąco"
     }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "subtitle": "Masz pytanie lub potrzebujesz pomocy? Napisz do nas.",
+    "name": "Imię i nazwisko",
+    "email": "Adres e-mail",
+    "subject": "Temat (opcjonalnie)",
+    "message": "Wiadomość",
+    "send": "Wyślij wiadomość",
+    "sending": "Wysyłanie…",
+    "clear": "Wyczyść",
+    "success": "Dziękujemy! Odpowiemy tak szybko, jak to możliwe.",
+    "error": "Coś poszło nie tak",
+    "placeholders": {
+      "name": "Jan Kowalski",
+      "email": "jan.kowalski@example.com",
+      "subject": "Krótki temat",
+      "message": "Opisz proszę swój problem lub pytanie…"
+    },
+    "errors": {
+      "name": "Podaj imię i nazwisko.",
+      "email": "Podaj poprawny adres e-mail.",
+      "message": "Wiadomość musi mieć co najmniej 3 znaki."
+    },
+    "counter": "{{n}} / {{max}} znaków"
   }
 }

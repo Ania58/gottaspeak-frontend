@@ -51,5 +51,30 @@
       "asc": "Ascendente",
       "desc": "Descendente"
     }
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "¿Tienes una pregunta o necesitas ayuda? Envíanos un mensaje.",
+    "name": "Nombre y apellidos",
+    "email": "Correo electrónico",
+    "subject": "Asunto (opcional)",
+    "message": "Mensaje",
+    "send": "Enviar mensaje",
+    "sending": "Enviando…",
+    "clear": "Limpiar",
+    "success": "¡Gracias! Te responderemos lo antes posible.",
+    "error": "Algo salió mal",
+    "placeholders": {
+      "name": "Juan Pérez",
+      "email": "juan.perez@example.com",
+      "subject": "Asunto breve",
+      "message": "Describe tu pregunta o problema…"
+    },
+    "errors": {
+      "name": "Introduce tu nombre.",
+      "email": "Introduce un correo válido.",
+      "message": "El mensaje debe tener al menos 3 caracteres."
+    },
+    "counter": "{{n}} / {{max}} caracteres"
   }
 }
