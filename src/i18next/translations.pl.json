@@ -71,6 +71,10 @@
       "subject": "Krótki temat",
       "message": "Opisz proszę swój problem lub pytanie…"
     },
+    "channel": { "label": "Kanał", "hello": "Hello", "support": "Support" },
+    "advanced": { "show": "Więcej opcji", "hide": "Mniej opcji" },
+    "userId": "ID użytkownika",
+    "optional": "opcjonalne",
     "errors": {
       "name": "Podaj imię i nazwisko.",
       "email": "Podaj poprawny adres e-mail.",

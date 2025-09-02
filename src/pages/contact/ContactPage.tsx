@@ -5,11 +5,15 @@ const API_URL =
   (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/+$/, "") ||
   "http://localhost:4000";
 
+type Channel = "hello" | "support";
+
 type FormState = {
   name: string;
   email: string;
   subject: string;
   message: string;
+  channel: Channel;
+  userId?: string;
 };
 
 export default function ContactPage() {
@@ -20,8 +24,10 @@ export default function ContactPage() {
     email: "",
     subject: "",
     message: "",
+    channel: "support",
+    userId: "",
   });
-  const [touched, setTouched] = useState<Record<keyof FormState, boolean>>({
+  const [touched, setTouched] = useState<Record<keyof Omit<FormState, "channel" | "userId">, boolean>>({
     name: false,
     email: false,
     subject: false,
@@ -30,14 +36,15 @@ export default function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [ok, setOk] = useState(false);
+  const [advanced, setAdvanced] = useState(false);
 
   const emailOk = useMemo(
     () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()),
     [form.email]
   );
 
-  const errors: Partial<Record<keyof FormState, string>> = useMemo(() => {
-    const e: Partial<Record<keyof FormState, string>> = {};
+  const errors: Partial<Record<keyof Omit<FormState, "channel" | "userId">, string>> = useMemo(() => {
+    const e: Partial<Record<keyof Omit<FormState, "channel" | "userId">, string>> = {};
     if (!form.name.trim()) e.name = t("contact.errors.name");
     if (!emailOk) e.email = t("contact.errors.email");
     if (!form.message.trim() || form.message.trim().length < 3)
@@ -61,11 +68,17 @@ export default function ContactPage() {
     const id = window.setTimeout(() => {
       localStorage.setItem(
         "contactDraft",
-        JSON.stringify({ name: form.name, email: form.email, subject: form.subject })
+        JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          channel: form.channel,
+          userId: form.userId,
+        })
       );
     }, 250);
     return () => window.clearTimeout(id);
-  }, [form.name, form.email, form.subject]);
+  }, [form.name, form.email, form.subject, form.channel, form.userId]);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -76,7 +89,7 @@ export default function ContactPage() {
 
     setSubmitting(true);
     try {
-      const r = await fetch(`${API_URL}/contact`, {
+      const r = await fetch(`${API_URL}/support-mail/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -84,6 +97,8 @@ export default function ContactPage() {
           email: form.email.trim(),
           message: form.message.trim().slice(0, 2000),
           subject: form.subject.trim() || undefined,
+          channel: form.channel,
+          userId: form.userId?.trim() || undefined,
         }),
       });
 
@@ -111,24 +126,30 @@ export default function ContactPage() {
             <div className="mt-3 h-1 w-24 rounded-full bg-gradient-to-r from-lime-400 via-cyan-400 to-violet-400" />
           </header>
 
-          {ok && (
-            <div
-              role="status"
-              aria-live="polite"
-              className="mb-4 animate-[fadeSlide_.2s_ease-out] rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800"
-            >
-              {t("contact.success")}
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <span className="text-sm text-black/70">{t("contact.channel.label")}</span>
+            <div className="inline-flex overflow-hidden rounded-lg border">
+              {(["hello", "support"] as Channel[]).map((c) => {
+                const active = form.channel === c;
+                return (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => setForm((f) => ({ ...f, channel: c }))}
+                    className={
+                      "cursor-pointer px-3 py-1.5 text-sm transition " +
+                      (active
+                        ? "text-white bg-gradient-to-r from-lime-500 via-emerald-500 to-cyan-500"
+                        : "bg-white hover:bg-black/5")
+                    }
+                    aria-pressed={active}
+                  >
+                    {t(`contact.channel.${c}`)}
+                  </button>
+                );
+              })}
             </div>
-          )}
-          {error && (
-            <div
-              role="alert"
-              className="mb-4 animate-[fadeSlide_.2s_ease-out] rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800"
-            >
-              {t("contact.error")}<span className="sr-only">: </span>
-              <span className="break-all">{error}</span>
-            </div>
-          )}
+          </div>
 
           <form onSubmit={onSubmit} className="grid gap-4">
             <div className="grid gap-1">
@@ -213,6 +234,32 @@ export default function ContactPage() {
               )}
             </div>
 
+            <div className="flex items-center justify-between">
+              <button
+                type="button"
+                onClick={() => setAdvanced((v) => !v)}
+                className="cursor-pointer rounded-md border px-3 py-1.5 text-xs transition hover:bg-black/5 active:scale-[0.98]"
+                aria-expanded={advanced}
+              >
+                {advanced ? t("contact.advanced.hide") : t("contact.advanced.show")}
+              </button>
+            </div>
+
+            {advanced && (
+              <div className="origin-top animate-[fadeSlide_.18s_ease-out] grid gap-1">
+                <label htmlFor="cUserId" className="text-sm text-black/80">
+                  {t("contact.userId")} <span className="text-black/50">({t("contact.optional")})</span>
+                </label>
+                <input
+                  id="cUserId"
+                  className="rounded-md border px-3 py-2 outline-none transition focus-visible:ring-2 focus-visible:ring-cyan-300"
+                  value={form.userId || ""}
+                  onChange={(e) => setForm((f) => ({ ...f, userId: e.target.value }))}
+                  placeholder="user_abc123"
+                />
+              </div>
+            )}
+
             <div className="mt-1 flex flex-wrap items-center gap-3">
               <button
                 type="submit"
@@ -237,7 +284,7 @@ export default function ContactPage() {
               <button
                 type="button"
                 onClick={() => {
-                  setForm({ name: "", email: "", subject: "", message: "" });
+                  setForm({ name: "", email: "", subject: "", message: "", channel: "support", userId: "" });
                   setTouched({ name: false, email: false, subject: false, message: false });
                   setOk(false);
                   setError("");
@@ -248,6 +295,25 @@ export default function ContactPage() {
               </button>
             </div>
           </form>
+
+          {ok && (
+            <div
+              role="status"
+              aria-live="polite"
+              className="mt-4 animate-[fadeSlide_.2s_ease-out] rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800"
+            >
+              {t("contact.success")}
+            </div>
+          )}
+          {error && (
+            <div
+              role="alert"
+              className="mt-4 animate-[fadeSlide_.2s_ease-out] rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800"
+            >
+              {t("contact.error")}<span className="sr-only">: </span>
+              <span className="break-all">{error}</span>
+            </div>
+          )}
         </div>
       </div>
 

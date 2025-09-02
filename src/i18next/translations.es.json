@@ -70,6 +70,10 @@
       "subject": "Asunto breve",
       "message": "Describe tu pregunta o problema…"
     },
+    "channel": { "label": "Canal", "hello": "Hello", "support": "Soporte" },
+    "advanced": { "show": "Más opciones", "hide": "Menos opciones" },
+    "userId": "ID de usuario",
+    "optional": "opcional",
     "errors": {
       "name": "Introduce tu nombre.",
       "email": "Introduce un correo válido.",
