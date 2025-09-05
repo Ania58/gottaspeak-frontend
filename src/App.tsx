@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import MaterialsList from "./pages/materials/MaterialsList";
 import MaterialDetails from "./pages/materials/MaterialDetails";
 import ContactPage from "./pages/contact/ContactPage";
+import Footer from "./components/layout/Footer";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route index element={<div className="p-6">Home</div>} />
         </Routes>
+        <Footer />
       </Router>
     </>
   )

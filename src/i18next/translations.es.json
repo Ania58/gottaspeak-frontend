@@ -80,5 +80,15 @@
       "message": "El mensaje debe tener al menos 3 caracteres."
     },
     "counter": "{{n}} / {{max}} caracteres"
+  },
+  "footer": {
+    "tagline": "Aprende de forma clara y eficaz, sin ruido.",
+    "navigate": "Navegación",
+    "legal": "Información",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "supportHint": "¿Necesitas ayuda?",
+    "writeUs": "Escríbenos",
+    "rights": "Todos los derechos reservados"
   }
 }

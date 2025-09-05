@@ -81,5 +81,15 @@
       "message": "Wiadomość musi mieć co najmniej 3 znaki."
     },
     "counter": "{{n}} / {{max}} znaków"
+  },
+  "footer": {
+    "tagline": "Ucz się jasno i skutecznie — bez zbędnego szumu.",
+    "navigate": "Nawigacja",
+    "legal": "Informacje",
+    "privacy": "Prywatność",
+    "terms": "Regulamin",
+    "supportHint": "Potrzebujesz pomocy?",
+    "writeUs": "Napisz do nas",
+    "rights": "Wszelkie prawa zastrzeżone"
   }
 }
