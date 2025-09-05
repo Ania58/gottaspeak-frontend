@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { changeLanguage } from "../i18next/index.ts";
+import { changeLanguage } from "../../i18next/index.ts";
 
 export default function Header() {
   const { t, i18n } = useTranslation();
