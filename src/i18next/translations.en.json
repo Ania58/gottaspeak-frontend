@@ -90,5 +90,32 @@
     "supportHint": "Need help?",
     "writeUs": "Write to us",
     "rights": "All rights reserved"
+  },
+  "home": {
+    "hero": {
+      "title": "A clear platform for language learning",
+      "subtitle": "Materials, courses (soon) and live lessons — all in one place without the noise."
+    },
+    "cta": {
+      "explore": "Browse materials",
+      "contact": "Contact us"
+    },
+    "soon": "Coming soon",
+    "cards": {
+      "materials": {
+        "title": "Materials",
+        "desc": "Lessons, exercises and concise grammar notes. Find what you need fast.",
+        "link": "See materials"
+      },
+      "courses": {
+        "title": "Courses",
+        "desc": "Structured programs with progress and goals — in progress."
+      },
+      "lessons": {
+        "title": "Live lessons",
+        "desc": "Join your teacher and enter the room in seconds.",
+        "link": "Go to lessons"
+      }
+    }
   }
 }

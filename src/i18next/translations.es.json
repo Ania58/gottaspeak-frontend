@@ -90,5 +90,32 @@
     "supportHint": "¿Necesitas ayuda?",
     "writeUs": "Escríbenos",
     "rights": "Todos los derechos reservados"
+  },
+  "home": {
+    "hero": {
+      "title": "Plataforma clara para aprender idiomas",
+      "subtitle": "Materiales, cursos (pronto) y clases en vivo, todo en un solo lugar sin ruido."
+    },
+    "cta": {
+      "explore": "Ver materiales",
+      "contact": "Contacto"
+    },
+    "soon": "Próximamente",
+    "cards": {
+      "materials": {
+        "title": "Materiales",
+        "desc": "Lecciones, ejercicios y notas gramaticales concisas. Encuentra lo que necesitas rápido.",
+        "link": "Abrir materiales"
+      },
+      "courses": {
+        "title": "Cursos",
+        "desc": "Programas estructurados con progreso y objetivos — en preparación."
+      },
+      "lessons": {
+        "title": "Clases en vivo",
+        "desc": "Conéctate con tu profesor y entra en la sala en segundos.",
+        "link": "Ir a clases"
+      }
+    }
   }
 }

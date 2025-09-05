@@ -91,5 +91,32 @@
     "supportHint": "Potrzebujesz pomocy?",
     "writeUs": "Napisz do nas",
     "rights": "Wszelkie prawa zastrzeżone"
+  },
+  "home": {
+    "hero": {
+      "title": "Jasna platforma do nauki języków",
+      "subtitle": "Materiały, kursy (wkrótce) i zajęcia na żywo. Wszystko w jednym miejscu, bez zbędnego szumu."
+    },
+    "cta": {
+      "explore": "Przeglądaj materiały",
+      "contact": "Skontaktuj się"
+    },
+    "soon": "Wkrótce",
+    "cards": {
+      "materials": {
+        "title": "Materiały",
+        "desc": "Lekcje, ćwiczenia i krótkie notatki gramatyczne. Szybko znajdziesz to, czego potrzebujesz.",
+        "link": "Zobacz materiały"
+      },
+      "courses": {
+        "title": "Kursy",
+        "desc": "Ustrukturyzowane programy z postępem i celami — już przygotowujemy."
+      },
+      "lessons": {
+        "title": "Zajęcia na żywo",
+        "desc": "Połącz się z lektorem i dołącz do pokoju zajęć w kilka sekund.",
+        "link": "Wejdź do panelu zajęć"
+      }
+    }
   }
 }
