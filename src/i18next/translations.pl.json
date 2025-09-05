@@ -118,5 +118,20 @@
         "link": "Wejdź do panelu zajęć"
       }
     }
+  },
+   "lessons": {
+    "join": {
+      "title": "Dołącz do zajęć",
+      "subtitle": "Wklej link do pokoju lub podaj identyfikator pokoju.",
+      "label": "Pokój lub link",
+      "placeholder": "np. gs-abc123-k9x0 lub pełny link",
+      "cta": "Dołącz",
+      "loading": "Łączenie…",
+      "tip": "Akceptujemy pełny link lub sam identyfikator w formacie gs-xxxxxx-xxxx.",
+      "error": {
+        "invalid": "Nieprawidłowy link lub identyfikator pokoju.",
+        "notfound": "Nie znaleziono pokoju lub link wygasł."
+      }
+    }
   }
 }

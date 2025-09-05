@@ -117,5 +117,20 @@
         "link": "Ir a clases"
       }
     }
+  },
+  "lessons": {
+    "join": {
+      "title": "Unirte a la clase",
+      "subtitle": "Pega el enlace de la sala o indica el ID.",
+      "label": "Sala o enlace",
+      "placeholder": "p. ej. gs-abc123-k9x0 o enlace completo",
+      "cta": "Unirse",
+      "loading": "Conectando…",
+      "tip": "Aceptamos la URL completa o solo el ID con formato gs-xxxxxx-xxxx.",
+      "error": {
+        "invalid": "Enlace o ID de sala no válido.",
+        "notfound": "Sala no encontrada o enlace caducado."
+      }
+    }
   }
 }

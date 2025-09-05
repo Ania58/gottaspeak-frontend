@@ -117,5 +117,20 @@
         "link": "Go to lessons"
       }
     }
+  },
+  "lessons": {
+    "join": {
+      "title": "Join your lesson",
+      "subtitle": "Paste the room link or provide the room ID.",
+      "label": "Room or link",
+      "placeholder": "e.g. gs-abc123-k9x0 or full link",
+      "cta": "Join",
+      "loading": "Connecting…",
+      "tip": "We accept a full URL or just an ID in the format gs-xxxxxx-xxxx.",
+      "error": {
+        "invalid": "Invalid link or room ID.",
+        "notfound": "Room not found or link expired."
+      }
+    }
   }
 }
