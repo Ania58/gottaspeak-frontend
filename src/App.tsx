@@ -6,6 +6,7 @@ import ContactPage from "./pages/contact/ContactPage";
 import Footer from "./components/layout/Footer";
 import HomePage from "./pages/home/HomePage";
 import LessonJoin from "./pages/lessons/LessonJoin";
+import NotFound from "./pages/common/NotFound";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="materials/:type/:slug" element={<MaterialDetails />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/lessons" element={<LessonJoin />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </Router>

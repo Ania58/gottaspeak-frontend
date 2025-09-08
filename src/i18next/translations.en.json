@@ -132,5 +132,11 @@
         "notfound": "Room not found or link expired."
       }
     }
+  },
+   "notFound": {
+    "title": "This page could not be found.",
+    "desc": "Check the address or go back to the homepage.",
+    "home": "Home",
+    "materials": "Materials"
   }
 }

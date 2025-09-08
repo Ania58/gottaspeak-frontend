@@ -132,5 +132,11 @@
         "notfound": "Sala no encontrada o enlace caducado."
       }
     }
+  },
+   "notFound": {
+    "title": "No se pudo encontrar esta página.",
+    "desc": "Revisa la dirección o vuelve al inicio.",
+    "home": "Inicio",
+    "materials": "Materiales"
   }
 }

@@ -133,5 +133,11 @@
         "notfound": "Nie znaleziono pokoju lub link wygasł."
       }
     }
+  },
+   "notFound": {
+    "title": "Nie znaleziono tej strony.",
+    "desc": "Sprawdź adres lub wróć na stronę główną.",
+    "home": "Strona główna",
+    "materials": "Materiały"
   }
 }
