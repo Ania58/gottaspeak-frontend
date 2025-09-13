@@ -9,6 +9,7 @@ import LessonJoin from "./pages/lessons/LessonJoin";
 import NotFound from "./pages/common/NotFound";
 import PrivacyPage from "./pages/common/PrivacyPage";
 import TermsPage from "./pages/common/TermsPage";
+import ScrollToTop from "./components/routing/ScrollToTop";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
     <>
       <Router>
         <Header />
+        <ScrollToTop />
         <Routes>
           <Route path ="/" element={<HomePage />} />
           <Route path="materials" element={<MaterialsList />} />
