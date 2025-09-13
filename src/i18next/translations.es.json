@@ -138,5 +138,12 @@
     "desc": "Revisa la dirección o vuelve al inicio.",
     "home": "Inicio",
     "materials": "Materiales"
+  },
+  "privacy": {
+    "title": "Política de privacidad",
+    "lead": "Versión breve por ahora. Ampliaremos el documento a medida que avancemos.",
+    "p1": "Guardamos solo lo necesario para operar la plataforma y no vendemos tus datos.",
+    "p2": "Puedes solicitar acceso, corrección o eliminación de tus datos — contáctanos.",
+    "p3": "Las cookies se usan para el inicio de sesión, analíticas y mejorar el servicio."
   }
 }

@@ -7,6 +7,7 @@ import Footer from "./components/layout/Footer";
 import HomePage from "./pages/home/HomePage";
 import LessonJoin from "./pages/lessons/LessonJoin";
 import NotFound from "./pages/common/NotFound";
+import PrivacyPage from "./pages/common/PrivacyPage";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/lessons" element={<LessonJoin />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
         </Routes>
         <Footer />
       </Router>

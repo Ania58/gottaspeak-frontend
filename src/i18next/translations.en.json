@@ -138,5 +138,12 @@
     "desc": "Check the address or go back to the homepage.",
     "home": "Home",
     "materials": "Materials"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lead": "A short placeholder for now. We’ll expand this document as we ship features.",
+    "p1": "We store only what’s necessary to run the platform and never sell your data.",
+    "p2": "You can request access, correction or deletion of your data — contact us via the form.",
+    "p3": "Cookies are used for sign-in, analytics and improving the service."
   }
 }

@@ -139,5 +139,12 @@
     "desc": "Sprawdź adres lub wróć na stronę główną.",
     "home": "Strona główna",
     "materials": "Materiały"
+  },
+  "privacy": {
+    "title": "Polityka prywatności",
+    "lead": "Poniżej znajdziesz skrócone informacje. Pełną wersję uzupełnimy w trakcie prac.",
+    "p1": "Przechowujemy tylko dane potrzebne do działania platformy i nie sprzedajemy ich osobom trzecim.",
+    "p2": "Możesz poprosić o dostęp do danych, ich poprawę lub usunięcie — napisz do nas przez Kontakt.",
+    "p3": "Pliki cookies służą do logowania, statystyk i poprawy jakości działania serwisu."
   }
 }
