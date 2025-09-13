@@ -145,5 +145,12 @@
     "p1": "Guardamos solo lo necesario para operar la plataforma y no vendemos tus datos.",
     "p2": "Puedes solicitar acceso, corrección o eliminación de tus datos — contáctanos.",
     "p3": "Las cookies se usan para el inicio de sesión, analíticas y mejorar el servicio."
+  },
+  "terms": {
+    "title": "Términos de servicio",
+    "lead": "Versión breve por ahora; publicaremos el documento completo con pagos/cursos.",
+    "p1": "Al usar el servicio aceptas las reglas y te comprometes a no abusar del sistema.",
+    "p2": "El contenido educativo está protegido por derechos de autor. No lo redistribuyas.",
+    "p3": "Anunciaremos los cambios en los Términos con antelación en la web."
   }
 }

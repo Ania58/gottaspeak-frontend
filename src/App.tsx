@@ -8,6 +8,7 @@ import HomePage from "./pages/home/HomePage";
 import LessonJoin from "./pages/lessons/LessonJoin";
 import NotFound from "./pages/common/NotFound";
 import PrivacyPage from "./pages/common/PrivacyPage";
+import TermsPage from "./pages/common/TermsPage";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/lessons" element={<LessonJoin />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
         </Routes>
         <Footer />
       </Router>

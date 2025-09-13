@@ -145,5 +145,12 @@
     "p1": "We store only what’s necessary to run the platform and never sell your data.",
     "p2": "You can request access, correction or deletion of your data — contact us via the form.",
     "p3": "Cookies are used for sign-in, analytics and improving the service."
+  },
+   "terms": {
+    "title": "Terms of Service",
+    "lead": "Short placeholder for now — we’ll publish the full doc when payments/courses go live.",
+    "p1": "By using the service you agree to the rules and refrain from misuse.",
+    "p2": "Educational content is protected by copyright. Do not redistribute beyond fair use.",
+    "p3": "We’ll announce changes to the Terms in advance on the website."
   }
 }

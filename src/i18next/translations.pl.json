@@ -146,5 +146,12 @@
     "p1": "Przechowujemy tylko dane potrzebne do działania platformy i nie sprzedajemy ich osobom trzecim.",
     "p2": "Możesz poprosić o dostęp do danych, ich poprawę lub usunięcie — napisz do nas przez Kontakt.",
     "p3": "Pliki cookies służą do logowania, statystyk i poprawy jakości działania serwisu."
+  },
+   "terms": {
+    "title": "Regulamin",
+    "lead": "To wersja skrócona — pełen dokument pojawi się po wdrożeniu płatności i kursów.",
+    "p1": "Korzystając z serwisu akceptujesz jego zasady i zobowiązujesz się nie nadużywać usług.",
+    "p2": "Treści edukacyjne są chronione prawem autorskim. Nie kopiuj ich poza dozwolony użytek.",
+    "p3": "Zmiany regulaminu będą komunikowane z wyprzedzeniem na stronie."
   }
 }
