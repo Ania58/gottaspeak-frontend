@@ -10,6 +10,7 @@ import NotFound from "./pages/common/NotFound";
 import PrivacyPage from "./pages/common/PrivacyPage";
 import TermsPage from "./pages/common/TermsPage";
 import ScrollToTop from "./components/routing/ScrollToTop";
+import SystemStatus from "./pages/tools/SystemStatus";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="/status" element={<SystemStatus />} />
         </Routes>
         <Footer />
       </Router>

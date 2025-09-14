@@ -152,5 +152,20 @@
     "p1": "By using the service you agree to the rules and refrain from misuse.",
     "p2": "Educational content is protected by copyright. Do not redistribute beyond fair use.",
     "p3": "We’ll announce changes to the Terms in advance on the website."
+  },
+  "status": {
+    "title": "System status",
+    "subtitle": "Quick check of the backend and DB.",
+    "loading": "Checking…",
+    "root": "Backend /",
+    "config": "Public config",
+    "materials": "Materials (1 item)",
+    "languages": "Languages",
+    "items": "Items",
+    "ok": "OK",
+    "fail": "Error",
+    "overall": "Overall:",
+    "allGood": "all good",
+    "issues": "needs attention"
   }
 }

@@ -152,5 +152,20 @@
     "p1": "Al usar el servicio aceptas las reglas y te comprometes a no abusar del sistema.",
     "p2": "El contenido educativo está protegido por derechos de autor. No lo redistribuyas.",
     "p3": "Anunciaremos los cambios en los Términos con antelación en la web."
+  },
+  "status": {
+    "title": "Estado del sistema",
+    "subtitle": "Comprobación rápida del backend y la base de datos.",
+    "loading": "Comprobando…",
+    "root": "Backend /",
+    "config": "Config pública",
+    "materials": "Materiales (1 ítem)",
+    "languages": "Idiomas",
+    "items": "Elementos",
+    "ok": "OK",
+    "fail": "Error",
+    "overall": "Resumen:",
+    "allGood": "todo bien",
+    "issues": "requiere atención"
   }
 }
