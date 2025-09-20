@@ -11,6 +11,7 @@ import PrivacyPage from "./pages/common/PrivacyPage";
 import TermsPage from "./pages/common/TermsPage";
 import ScrollToTop from "./components/routing/ScrollToTop";
 import SystemStatus from "./pages/tools/SystemStatus";
+import LessonViewer from "./pages/lessons/LessonViewer";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/status" element={<SystemStatus />} />
+          <Route path="/lessons/:level/:unit/:lesson" element={<LessonViewer />} />
         </Routes>
         <Footer />
       </Router>
