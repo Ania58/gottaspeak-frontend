@@ -10,28 +10,23 @@ export default function CourseUnits() {
   const [units, setUnits] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+useEffect(() => {
     let cancelled = false;
     (async () => {
-      setLoading(true);
-      const found: number[] = [];
-      for (let u = 1; u <= 20; u++) {
+        setLoading(true);
         try {
-          const res = await fetch(`${API}/courses/${level}/units/${u}`);
-          if (!res.ok) continue;
-          const lessons = (await res.json()) as string[];
-          if (Array.isArray(lessons) && lessons.length > 0) found.push(u);
-        } catch {}
-      }
-      if (!cancelled) {
-        setUnits(found);
-        setLoading(false);
-      }
+        const res = await fetch(`${API}/courses/${level}`);
+        const list = (await res.json()) as string[];
+        if (!cancelled) setUnits((list || []).map(n => Number(n)));
+        } catch {
+        if (!cancelled) setUnits([]);
+        } finally {
+        if (!cancelled) setLoading(false);
+        }
     })();
-    return () => {
-      cancelled = true;
-    };
-  }, [level]);
+    return () => { cancelled = true; };
+}, [level]);
+
 
   return (
     <div className="max-w-5xl mx-auto p-6">
