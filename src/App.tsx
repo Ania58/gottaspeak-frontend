@@ -15,6 +15,7 @@ import LessonViewer from "./pages/lessons/LessonViewer";
 import CoursesList from "./pages/courses/CoursesList";
 import CourseUnits from "./pages/courses/CourseUnits";
 import UnitLessons from "./pages/courses/UnitLessons";
+import RevisionViewer from "./pages/lessons/RevisionViewer";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/status" element={<SystemStatus />} />
           <Route path="/lessons/:level/:unit/:lesson" element={<LessonViewer />} />
+          <Route path="/courses/:level/units/:unit/revision" element={<RevisionViewer />} />
         </Routes>
         <Footer />
       </Router>

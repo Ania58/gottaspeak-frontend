@@ -75,7 +75,10 @@
     "lessonTitle": "Lección {{lesson}}",
     "clickToOpen": "Haz clic para abrir",
     "open": "Abrir",
-    "backToUnits": "Volver a unidades"
+    "backToUnits": "Volver a unidades",
+    "revisionTitle": "Repaso {{unit}}",
+    "revisionHint": "Revisión rápida de las últimas 5 lecciones.",
+    "openRevision": "Abrir repaso"
   },
   "lessonViewer": {
     "loading": "Cargando…",
@@ -85,6 +88,14 @@
     "next": "Siguiente",
     "notFoundTitle": "Lección no disponible",
     "notFoundDesc": "Esta lección no existe o aún no está publicada.",
+    "backToUnit": "Volver a la unidad"
+  },
+  "revisionViewer": {
+    "loading": "Cargando…",
+    "fallbackTitle": "Repaso — unidad {{unit}}",
+    "breadcrumb": "Curso {{level}} · Repaso · Paso {{step}}/{{total}}",
+    "notFoundTitle": "Repaso no disponible",
+    "notFoundDesc": "Este repaso no existe o aún no está publicado.",
     "backToUnit": "Volver a la unidad"
   },
   "contact": {

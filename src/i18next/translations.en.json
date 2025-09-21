@@ -75,7 +75,10 @@
     "lessonTitle": "Lesson {{lesson}}",
     "clickToOpen": "Click to open",
     "open": "Open",
-    "backToUnits": "Back to units"
+    "backToUnits": "Back to units",
+    "revisionTitle": "Revision {{unit}}",
+    "revisionHint": "Quick review of the last 5 lessons.",
+    "openRevision": "Open revision"
   },
   "lessonViewer": {
     "loading": "Loading…",
@@ -85,6 +88,14 @@
     "next": "Next",
     "notFoundTitle": "Lesson not available",
     "notFoundDesc": "This lesson does not exist or isn’t published yet.",
+    "backToUnit": "Back to unit"
+  },
+  "revisionViewer": {
+    "loading": "Loading…",
+    "fallbackTitle": "Revision — Unit {{unit}}",
+    "breadcrumb": "Course {{level}} · Revision · Step {{step}}/{{total}}",
+    "notFoundTitle": "Revision not available",
+    "notFoundDesc": "This revision does not exist or isn’t published yet.",
     "backToUnit": "Back to unit"
   },
   "contact": {

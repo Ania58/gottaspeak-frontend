@@ -76,7 +76,10 @@
     "lessonTitle": "Lekcja {{lesson}}",
     "clickToOpen": "Kliknij, aby otworzyć",
     "open": "Otwórz",
-    "backToUnits": "Wróć do rozdziałów"
+    "backToUnits": "Wróć do rozdziałów",
+    "revisionTitle": "Powtórka {{unit}}",
+    "revisionHint": "Szybki przegląd materiału z ostatnich 5 lekcji.",
+    "openRevision": "Otwórz powtórkę"
   },
   "lessonViewer": {
     "loading": "Ładowanie…",
@@ -86,6 +89,14 @@
     "next": "Dalej",
     "notFoundTitle": "Lekcja niedostępna",
     "notFoundDesc": "Ta lekcja nie istnieje albo nie jest jeszcze opublikowana.",
+    "backToUnit": "Wróć do rozdziału"
+  },
+  "revisionViewer": {
+    "loading": "Ładowanie…",
+    "fallbackTitle": "Powtórka — rozdział {{unit}}",
+    "breadcrumb": "Kurs {{level}} · Powtórka · Krok {{step}}/{{total}}",
+    "notFoundTitle": "Powtórka niedostępna",
+    "notFoundDesc": "Ta powtórka nie istnieje albo nie jest jeszcze opublikowana.",
     "backToUnit": "Wróć do rozdziału"
   },
   "contact": {
