@@ -12,6 +12,9 @@ import TermsPage from "./pages/common/TermsPage";
 import ScrollToTop from "./components/routing/ScrollToTop";
 import SystemStatus from "./pages/tools/SystemStatus";
 import LessonViewer from "./pages/lessons/LessonViewer";
+import CoursesList from "./pages/courses/CoursesList";
+import CourseUnits from "./pages/courses/CourseUnits";
+import UnitLessons from "./pages/courses/UnitLessons";
 
 function App() {
 
@@ -24,6 +27,9 @@ function App() {
           <Route path ="/" element={<HomePage />} />
           <Route path="materials" element={<MaterialsList />} />
           <Route path="materials/:type/:slug" element={<MaterialDetails />} />
+          <Route path="/courses" element={<CoursesList />} />
+          <Route path="/courses/:level" element={<CourseUnits />} />
+          <Route path="/courses/:level/units/:unit" element={<UnitLessons />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/lessons" element={<LessonJoin />} />
           <Route path="*" element={<NotFound />} />

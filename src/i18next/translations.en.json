@@ -3,6 +3,7 @@
   "language": "Language",
   "nav": {
     "materials": "Materials",
+    "courses": "Courses",
     "contact": "Contact",
     "joinDemo": "Join (demo)"
   },
@@ -51,6 +52,37 @@
       "asc": "Ascending",
       "desc": "Descending"
     }
+  },
+"courses": {
+    "pageTitle": "Courses",
+    "openCourse": "Open course",
+    "levelTitle": "English {{level}}",
+    "levelDesc": {
+      "A2": "Lower-intermediate course"
+    }
+  },
+  "courseUnits": {
+    "title": "Course {{level}}",
+    "loading": "Loading units…",
+    "empty": "No units available yet.",
+    "unitTitle": "Unit {{unit}}",
+    "openLessons": "Open lessons"
+  },
+  "unitLessons": {
+    "title": "Course {{level}} · Unit {{unit}}",
+    "loading": "Loading lessons…",
+    "empty": "No lessons in this unit yet.",
+    "lessonTitle": "Lesson {{lesson}}",
+    "clickToOpen": "Click to open",
+    "open": "Open",
+    "backToUnits": "Back to units"
+  },
+  "lessonViewer": {
+    "loading": "Loading…",
+    "fallbackTitle": "Lesson {{lesson}}",
+    "breadcrumb": "Course {{level}} · Unit {{unit}} · Lesson {{lesson}} · Step {{step}}/{{total}}",
+    "prev": "Prev",
+    "next": "Next"
   },
   "contact": {
     "title": "Contact",

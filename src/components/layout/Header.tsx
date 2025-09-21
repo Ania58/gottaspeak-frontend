@@ -39,6 +39,15 @@ export default function Header() {
               {t("nav.materials")}
             </NavLink>
             <NavLink
+              to="/courses"
+              className={({ isActive }) =>
+                (isActive ? "font-semibold underline " : "hover:underline ") +
+                "text-black/80 transition-colors"
+              }
+            >
+              {t("nav.courses")}
+            </NavLink>
+            <NavLink
               to="/contact"
               className={({ isActive }) =>
                 (isActive ? "font-semibold underline " : "hover:underline ") +

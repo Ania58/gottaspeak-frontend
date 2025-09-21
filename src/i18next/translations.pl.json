@@ -3,6 +3,7 @@
   "language": "Język",
   "nav": {
     "materials": "Materiały",
+    "courses": "Kursy",
     "contact": "Kontakt",
     "joinDemo": "Dołącz (demo)"
   },
@@ -52,6 +53,37 @@
       "asc": "Rosnąco",
       "desc": "Malejąco"
     }
+  },
+  "courses": {
+    "pageTitle": "Kursy",
+    "openCourse": "Otwórz kurs",
+    "levelTitle": "Angielski {{level}}",
+    "levelDesc": {
+      "A2": "Kurs na poziomie niższym średniozaawansowanym"
+    }
+  },
+  "courseUnits": {
+    "title": "Kurs {{level}}",
+    "loading": "Ładowanie rozdziałów…",
+    "empty": "Brak dostępnych rozdziałów.",
+    "unitTitle": "Rozdział {{unit}}",
+    "openLessons": "Otwórz lekcje"
+  },
+  "unitLessons": {
+    "title": "Kurs {{level}} · Rozdział {{unit}}",
+    "loading": "Ładowanie lekcji…",
+    "empty": "Brak lekcji w tym rozdziale.",
+    "lessonTitle": "Lekcja {{lesson}}",
+    "clickToOpen": "Kliknij, aby otworzyć",
+    "open": "Otwórz",
+    "backToUnits": "Wróć do rozdziałów"
+  },
+  "lessonViewer": {
+    "loading": "Ładowanie…",
+    "fallbackTitle": "Lekcja {{lesson}}",
+    "breadcrumb": "Kurs {{level}} · Rozdział {{unit}} · Lekcja {{lesson}} · Krok {{step}}/{{total}}",
+    "prev": "Wstecz",
+    "next": "Dalej"
   },
   "contact": {
     "title": "Kontakt",

@@ -3,6 +3,7 @@
   "language": "Idioma",
   "nav": {
     "materials": "Materiales",
+    "courses": "Cursos",
     "contact": "Contacto",
     "joinDemo": "Unirse (demo)"
   },
@@ -51,6 +52,37 @@
       "asc": "Ascendente",
       "desc": "Descendente"
     }
+  },
+"courses": {
+    "pageTitle": "Cursos",
+    "openCourse": "Abrir curso",
+    "levelTitle": "Inglés {{level}}",
+    "levelDesc": {
+      "A2": "Curso de nivel preintermedio"
+    }
+  },
+  "courseUnits": {
+    "title": "Curso {{level}}",
+    "loading": "Cargando unidades…",
+    "empty": "No hay unidades disponibles.",
+    "unitTitle": "Unidad {{unit}}",
+    "openLessons": "Abrir lecciones"
+  },
+  "unitLessons": {
+    "title": "Curso {{level}} · Unidad {{unit}}",
+    "loading": "Cargando lecciones…",
+    "empty": "No hay lecciones en esta unidad.",
+    "lessonTitle": "Lección {{lesson}}",
+    "clickToOpen": "Haz clic para abrir",
+    "open": "Abrir",
+    "backToUnits": "Volver a unidades"
+  },
+  "lessonViewer": {
+    "loading": "Cargando…",
+    "fallbackTitle": "Lección {{lesson}}",
+    "breadcrumb": "Curso {{level}} · Unidad {{unit}} · Lección {{lesson}} · Paso {{step}}/{{total}}",
+    "prev": "Atrás",
+    "next": "Siguiente"
   },
   "contact": {
     "title": "Contacto",
