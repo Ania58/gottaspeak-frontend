@@ -83,7 +83,10 @@
     "fallbackTitle": "Lekcja {{lesson}}",
     "breadcrumb": "Kurs {{level}} · Rozdział {{unit}} · Lekcja {{lesson}} · Krok {{step}}/{{total}}",
     "prev": "Wstecz",
-    "next": "Dalej"
+    "next": "Dalej",
+    "notFoundTitle": "Lekcja niedostępna",
+    "notFoundDesc": "Ta lekcja nie istnieje albo nie jest jeszcze opublikowana.",
+    "backToUnit": "Wróć do rozdziału"
   },
   "contact": {
     "title": "Kontakt",
