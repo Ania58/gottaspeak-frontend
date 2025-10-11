@@ -88,7 +88,11 @@
     "next": "Next",
     "notFoundTitle": "Lesson not available",
     "notFoundDesc": "This lesson does not exist or isn’t published yet.",
-    "backToUnit": "Back to unit"
+    "backToUnit": "Back to unit",
+    "backToCourses": "Back to courses",
+    "finishAndBackToUnit": "Finish lesson and return to unit",
+    "breadcrumbCourses": "Courses",
+    "breadcrumbUnit": "Unit {{unit}}"
   },
   "revisionViewer": {
     "loading": "Loading…",
@@ -96,7 +100,10 @@
     "breadcrumb": "Course {{level}} · Revision · Step {{step}}/{{total}}",
     "notFoundTitle": "Revision not available",
     "notFoundDesc": "This revision does not exist or isn’t published yet.",
-    "backToUnit": "Back to unit"
+    "backToUnit": "Back to unit",
+    "backToCourses": "Back to courses",
+    "breadcrumbCourses": "Courses",
+    "breadcrumbUnit": "Unit {{unit}}"
   },
   "contact": {
     "title": "Contact",

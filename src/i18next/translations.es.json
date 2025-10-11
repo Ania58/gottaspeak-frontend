@@ -88,7 +88,11 @@
     "next": "Siguiente",
     "notFoundTitle": "Lección no disponible",
     "notFoundDesc": "Esta lección no existe o aún no está publicada.",
-    "backToUnit": "Volver a la unidad"
+    "backToUnit": "Volver a la unidad",
+    "backToCourses": "Volver a los cursos",
+    "finishAndBackToUnit": "Terminar la lección y volver a la unidad",
+    "breadcrumbCourses": "Cursos",
+    "breadcrumbUnit": "Unidad {{unit}}"
   },
   "revisionViewer": {
     "loading": "Cargando…",
@@ -96,7 +100,10 @@
     "breadcrumb": "Curso {{level}} · Repaso · Paso {{step}}/{{total}}",
     "notFoundTitle": "Repaso no disponible",
     "notFoundDesc": "Este repaso no existe o aún no está publicado.",
-    "backToUnit": "Volver a la unidad"
+    "backToUnit": "Volver a la unidad",
+    "backToCourses": "Volver a los cursos",
+    "breadcrumbCourses": "Cursos",
+    "breadcrumbUnit": "Unidad {{unit}}"
   },
   "contact": {
     "title": "Contacto",

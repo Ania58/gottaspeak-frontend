@@ -89,7 +89,11 @@
     "next": "Dalej",
     "notFoundTitle": "Lekcja niedostępna",
     "notFoundDesc": "Ta lekcja nie istnieje albo nie jest jeszcze opublikowana.",
-    "backToUnit": "Wróć do rozdziału"
+    "backToUnit": "Wróć do rozdziału",
+    "backToCourses": "Wróć do kursów",
+    "finishAndBackToUnit": "Zakończ lekcję i wróć do rozdziału",
+    "breadcrumbCourses": "Kursy",
+    "breadcrumbUnit": "Rozdział {{unit}}"
   },
   "revisionViewer": {
     "loading": "Ładowanie…",
@@ -97,7 +101,10 @@
     "breadcrumb": "Kurs {{level}} · Powtórka · Krok {{step}}/{{total}}",
     "notFoundTitle": "Powtórka niedostępna",
     "notFoundDesc": "Ta powtórka nie istnieje albo nie jest jeszcze opublikowana.",
-    "backToUnit": "Wróć do rozdziału"
+    "backToUnit": "Wróć do rozdziału",
+    "backToCourses": "Wróć do kursów",
+    "breadcrumbCourses": "Kursy",
+    "breadcrumbUnit": "Rozdział {{unit}}"
   },
   "contact": {
     "title": "Kontakt",
