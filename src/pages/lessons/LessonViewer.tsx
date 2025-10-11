@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { useTranslation } from "react-i18next";
 
@@ -9,15 +9,23 @@ const API = import.meta.env.VITE_API_URL || "http://localhost:4000";
 export default function LessonViewer() {
   const { t } = useTranslation();
   const { level = "A2", unit = "1", lesson = "1" } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [data, setData] = useState<LessonRes | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [step, setStep] = useState(0);
+
+  const key = `lesson:${level}:${unit}:${lesson}:step`;
+  const stepFromUrl = Math.max(
+    0,
+    (parseInt(searchParams.get("step") || "", 10) || 1) - 1
+  );
+  const stepFromStorage = Math.max(0, parseInt(sessionStorage.getItem(key) || "1", 10) - 1);
+  const [step, setStep] = useState<number>(stepFromUrl || stepFromStorage || 0);
 
   useEffect(() => {
     let cancelled = false;
     setData(null);
     setError(null);
-    setStep(0);
 
     (async () => {
       try {
@@ -25,13 +33,10 @@ export default function LessonViewer() {
           if (!cancelled) setError("not-found");
           return;
         }
-
         const res = await fetch(`${API}/courses/${level}/units/${unit}/lessons/${lesson}`);
         if (!res.ok) { if (!cancelled) setError(`http-${res.status}`); return; }
-
         const json: LessonRes = await res.json();
         if (!json || !Array.isArray(json.steps)) { if (!cancelled) setError("bad-format"); return; }
-
         if (!cancelled) setData(json);
       } catch {
         if (!cancelled) setError("network");
@@ -40,6 +45,15 @@ export default function LessonViewer() {
 
     return () => { cancelled = true; };
   }, [level, unit, lesson]);
+
+  useEffect(() => {
+    const urlStep = parseInt(searchParams.get("step") || "", 10);
+    const next = String(step + 1);
+    if (String(urlStep) !== next) {
+      setSearchParams(prev => { prev.set("step", next); return prev; }, { replace: true });
+    }
+    sessionStorage.setItem(key, next);
+  }, [step, key, searchParams, setSearchParams]);
 
   if (error) {
     return (
@@ -95,6 +109,3 @@ export default function LessonViewer() {
     </div>
   );
 }
-
-
-
