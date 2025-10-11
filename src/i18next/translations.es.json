@@ -162,7 +162,8 @@
       },
       "courses": {
         "title": "Cursos",
-        "desc": "Programas estructurados con progreso y objetivos — en preparación."
+        "desc": "Programas estructurados con progreso y objetivos — en preparación.",
+        "link": "Ver cursos"
       },
       "lessons": {
         "title": "Clases en vivo",

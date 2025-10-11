@@ -162,7 +162,8 @@
       },
       "courses": {
         "title": "Courses",
-        "desc": "Structured programs with progress and goals — in progress."
+        "desc": "Structured programs with progress and goals — in progress.",
+        "link": "See courses"
       },
       "lessons": {
         "title": "Live lessons",

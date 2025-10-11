@@ -54,14 +54,22 @@ export default function HomePage() {
             </div>
           </Link>
 
-          <div className="rounded-xl border bg-white/80 p-5 opacity-95 shadow-sm">
+           <Link
+            to="/courses"
+            className="group rounded-xl border bg-white/80 p-5 opacity-95 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+          >
             <div className="flex items-center gap-2">
               <div className="h-1 w-16 rounded-full bg-gradient-to-r from-lime-400 via-cyan-400 to-violet-400" />
-              <span className="rounded-full bg-black/5 px-2 py-0.5 text-xs">{t("home.soon")}</span>
+              <span className="rounded-full bg-black/5 px-2 py-0.5 text-xs">
+                {t("home.soon")}
+              </span>
             </div>
             <h3 className="mt-3 text-lg font-medium">{t("home.cards.courses.title")}</h3>
             <p className="mt-1 text-sm text-black/70">{t("home.cards.courses.desc")}</p>
-          </div>
+            <div className="mt-4 inline-block text-sm underline decoration-transparent underline-offset-2 transition group-hover:decoration-inherit">
+              {t("home.cards.courses.link")}
+            </div>
+          </Link>
 
           <Link
             to="/lessons"

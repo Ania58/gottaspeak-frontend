@@ -163,7 +163,8 @@
       },
       "courses": {
         "title": "Kursy",
-        "desc": "Ustrukturyzowane programy z postępem i celami — już przygotowujemy."
+        "desc": "Ustrukturyzowane programy z postępem i celami — już przygotowujemy.",
+        "link": "Zobacz kursy"
       },
       "lessons": {
         "title": "Zajęcia na żywo",
