@@ -197,6 +197,30 @@
       "generic": "Algo salió mal."
     }
   },
+  "myLessons": {
+    "title": "Mis clases",
+    "subtitle": "Aquí puedes ver todas tus clases en vivo programadas o activas.",
+    "loading": "Cargando clases…",
+    "empty": "No se encontraron clases para tu cuenta.",
+    "join": "Unirse",
+    "expires": "Expira el {{date}}",
+    "itemTitle": "Curso {{level}} · Unidad {{unit}} · Lección {{lesson}}",
+    "changeIdentity": "Cambiar identidad del usuario",
+    "identity": {
+      "title": "Identifícate",
+      "userId": "ID de usuario",
+      "userIdPh": "por ejemplo, user123",
+      "displayName": "Nombre visible",
+      "displayNamePh": "por ejemplo, Juan Pérez",
+      "role": "Rol",
+      "roles": {
+        "student": "Estudiante",
+        "teacher": "Profesor"
+      },
+      "save": "Guardar",
+      "note": "Tus datos se guardan solo localmente con fines de prueba."
+    }
+  },
    "notFound": {
     "title": "No se pudo encontrar esta página.",
     "desc": "Revisa la dirección o vuelve al inicio.",
