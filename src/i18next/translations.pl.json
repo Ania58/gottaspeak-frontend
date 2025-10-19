@@ -188,6 +188,16 @@
       }
     }
   },
+  "liveJoin": {
+    "title": "Dołączanie do lekcji na żywo…",
+    "waiting": "Chwileczkę. Przygotowujemy Twoją sesję…",
+    "errorTitle": "Nie udało się dołączyć do lekcji",
+    "backHome": "Powrót na stronę główną",
+    "errors": {
+      "missingToken": "Brakuje tokenu w adresie URL (?t=...)",
+      "generic": "Coś poszło nie tak."
+    }
+  },
    "notFound": {
     "title": "Nie znaleziono tej strony.",
     "desc": "Sprawdź adres lub wróć na stronę główną.",
