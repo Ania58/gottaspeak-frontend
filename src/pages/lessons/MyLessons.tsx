@@ -32,12 +32,16 @@ export default function MyLessons() {
   const [role, setRole] = useState<"teacher" | "student">(
     (localStorage.getItem("gs:role") as "teacher" | "student") || "student"
   );
+  const [identified, setIdentified] = useState(() => localStorage.getItem("gs:identified") === "1");
 
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState<SessionItem[]>([]);
   const [error, setError] = useState<string>("");
 
-  const ready = useMemo(() => Boolean(userId && displayName), [userId, displayName]);
+  const ready = useMemo(
+    () => identified && Boolean(userId) && Boolean(displayName),
+    [identified, userId, displayName]
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -74,7 +78,8 @@ export default function MyLessons() {
     localStorage.setItem("gs:userId", userId);
     localStorage.setItem("gs:displayName", displayName);
     localStorage.setItem("gs:role", role);
-    setItems([]);
+    localStorage.setItem("gs:identified", "1"); 
+    setIdentified(true);
   }
 
   async function handleJoin(id: string) {
@@ -90,7 +95,7 @@ export default function MyLessons() {
         return;
       }
       const data: JoinResp = await res.json();
-      window.location.href = data.url; 
+      window.location.href = data.url;
     } catch (e: any) {
       alert(String(e?.message || e));
     }
@@ -101,7 +106,7 @@ export default function MyLessons() {
       <h1 className="text-3xl font-bold mb-2">{t("myLessons.title")}</h1>
       <p className="text-black/70 mb-6">{t("myLessons.subtitle")}</p>
 
-      {!ready && (
+      {!identified && (
         <form onSubmit={handleSaveIdentity} className="mb-8 rounded-xl border bg-white/80 p-4 shadow-sm">
           <h2 className="text-lg font-semibold mb-3">{t("myLessons.identity.title")}</h2>
           <div className="grid gap-3 sm:grid-cols-3">
@@ -154,7 +159,7 @@ export default function MyLessons() {
         </form>
       )}
 
-      {ready && (
+      {identified && (
         <>
           {loading ? (
             <p>{t("myLessons.loading")}</p>
@@ -193,14 +198,16 @@ export default function MyLessons() {
           <div className="mt-6">
             <button
               onClick={() => {
-                setLoading(true);
                 localStorage.removeItem("gs:userId");
                 localStorage.removeItem("gs:displayName");
                 localStorage.removeItem("gs:role");
+                localStorage.removeItem("gs:identified");
                 setUserId("");
                 setDisplayName("");
                 setRole("student");
+                setIdentified(false);
                 setItems([]);
+                setError("");
                 setLoading(false);
               }}
               className="text-sm underline"
@@ -213,3 +220,4 @@ export default function MyLessons() {
     </div>
   );
 }
+
