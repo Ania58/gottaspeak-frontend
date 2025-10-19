@@ -188,7 +188,7 @@ export default function MyLessons() {
                   </div>
                   <button
                     onClick={() => handleJoin(s.id)}
-                    className="px-3 py-2 rounded-lg bg-slate-900 text-white hover:bg-black"
+                    className="px-3 py-2 rounded-lg bg-slate-900 text-white hover:bg-black cursor-pointer"
                   >
                     {t("myLessons.join")}
                   </button>
