@@ -187,6 +187,16 @@
       }
     }
   },
+  "liveJoin": {
+    "title": "Joining live lesson…",
+    "waiting": "Please wait. Preparing your session…",
+    "errorTitle": "Couldn't join the session",
+    "backHome": "Back to home",
+    "errors": {
+      "missingToken": "Missing token in URL (?t=...)",
+      "generic": "Something went wrong."
+    }
+  },
    "notFound": {
     "title": "This page could not be found.",
     "desc": "Check the address or go back to the homepage.",
