@@ -187,6 +187,16 @@
       }
     }
   },
+  "liveJoin": {
+    "title": "Uniéndose a la clase en vivo…",
+    "waiting": "Un momento, estamos preparando tu sesión…",
+    "errorTitle": "No se pudo unirse a la clase",
+    "backHome": "Volver al inicio",
+    "errors": {
+      "missingToken": "Falta el token en la URL (?t=...)",
+      "generic": "Algo salió mal."
+    }
+  },
    "notFound": {
     "title": "No se pudo encontrar esta página.",
     "desc": "Revisa la dirección o vuelve al inicio.",
