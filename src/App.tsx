@@ -7,6 +7,7 @@ import Footer from "./components/layout/Footer";
 import HomePage from "./pages/home/HomePage";
 import LessonJoin from "./pages/lessons/LessonJoin";
 import LiveJoin from "./pages/lessons/LiveJoin";
+import MyLessons from "./pages/lessons/MyLessons";
 import NotFound from "./pages/common/NotFound";
 import PrivacyPage from "./pages/common/PrivacyPage";
 import TermsPage from "./pages/common/TermsPage";
@@ -35,6 +36,7 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/lessons" element={<LessonJoin />} />
           <Route path="/live/:sessionId" element={<LiveJoin />} />
+          <Route path="/my/lessons" element={<MyLessons />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
