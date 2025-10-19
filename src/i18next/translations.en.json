@@ -197,6 +197,30 @@
       "generic": "Something went wrong."
     }
   },
+  "myLessons": {
+    "title": "My lessons",
+    "subtitle": "Here you can see all your upcoming or active live sessions.",
+    "loading": "Loading lessons…",
+    "empty": "No lessons found for your account.",
+    "join": "Join",
+    "expires": "Expires on {{date}}",
+    "itemTitle": "Course {{level}} · Unit {{unit}} · Lesson {{lesson}}",
+    "changeIdentity": "Change user identity",
+    "identity": {
+      "title": "Identify yourself",
+      "userId": "User ID",
+      "userIdPh": "e.g. user123",
+      "displayName": "Display name",
+      "displayNamePh": "e.g. John Smith",
+      "role": "Role",
+      "roles": {
+        "student": "Student",
+        "teacher": "Teacher"
+      },
+      "save": "Save",
+      "note": "Your data is stored only locally for testing purposes."
+    }
+  },
    "notFound": {
     "title": "This page could not be found.",
     "desc": "Check the address or go back to the homepage.",
