@@ -151,10 +151,11 @@ export default function MyLessons() {
           </div>
           <button
             type="submit"
-            className="mt-4 rounded-md border px-4 py-2 text-sm text-white shadow-sm bg-gradient-to-r from-lime-500 via-emerald-500 to-cyan-500"
-          >
+            className="cursor-pointer mt-4 rounded-md border px-4 py-2 text-sm text-white shadow-sm bg-gradient-to-r from-lime-500 via-emerald-500 to-cyan-500"
+            >
             {t("myLessons.identity.save")}
-          </button>
+           </button>
+
           <p className="mt-2 text-xs text-black/60">{t("myLessons.identity.note")}</p>
         </form>
       )}
