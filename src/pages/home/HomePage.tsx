@@ -72,7 +72,7 @@ export default function HomePage() {
           </Link>
 
           <Link
-            to="/lessons"
+            to="/my/lessons"
             className="group rounded-xl border bg-white/80 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
           >
             <div className="h-1 w-16 rounded-full bg-gradient-to-r from-lime-400 via-emerald-400 to-cyan-400" />
