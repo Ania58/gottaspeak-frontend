@@ -198,6 +198,30 @@
       "generic": "Coś poszło nie tak."
     }
   },
+  "myLessons": {
+    "title": "Moje lekcje",
+    "subtitle": "Tutaj zobaczysz wszystkie swoje zaplanowane lub aktywne lekcje na żywo.",
+    "loading": "Ładowanie lekcji…",
+    "empty": "Brak lekcji powiązanych z Twoim kontem.",
+    "join": "Dołącz",
+    "expires": "Wygasa: {{date}}",
+    "itemTitle": "Kurs {{level}} · Unit {{unit}} · Lekcja {{lesson}}",
+    "changeIdentity": "Zmień dane użytkownika",
+    "identity": {
+      "title": "Zidentyfikuj się",
+      "userId": "ID użytkownika",
+      "userIdPh": "np. user123",
+      "displayName": "Nazwa użytkownika",
+      "displayNamePh": "np. Jan Kowalski",
+      "role": "Rola",
+      "roles": {
+        "student": "Uczeń",
+        "teacher": "Lektor"
+      },
+      "save": "Zapisz",
+      "note": "Twoje dane są przechowywane lokalnie tylko do celów testowych."
+    }
+  },
    "notFound": {
     "title": "Nie znaleziono tej strony.",
     "desc": "Sprawdź adres lub wróć na stronę główną.",
