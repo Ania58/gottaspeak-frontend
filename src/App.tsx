@@ -5,8 +5,6 @@ import MaterialDetails from "./pages/materials/MaterialDetails";
 import ContactPage from "./pages/contact/ContactPage";
 import Footer from "./components/layout/Footer";
 import HomePage from "./pages/home/HomePage";
-import LessonJoin from "./pages/lessons/LessonJoin";
-import LiveJoin from "./pages/lessons/LiveJoin";
 import MyLessons from "./pages/lessons/MyLessons";
 import NotFound from "./pages/common/NotFound";
 import PrivacyPage from "./pages/common/PrivacyPage";
@@ -20,22 +18,19 @@ import UnitLessons from "./pages/courses/UnitLessons";
 import RevisionViewer from "./pages/lessons/RevisionViewer";
 
 function App() {
-
   return (
     <>
       <Router>
         <Header />
         <ScrollToTop />
         <Routes>
-          <Route path ="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="materials" element={<MaterialsList />} />
           <Route path="materials/:type/:slug" element={<MaterialDetails />} />
           <Route path="/courses" element={<CoursesList />} />
           <Route path="/courses/:level" element={<CourseUnits />} />
           <Route path="/courses/:level/units/:unit" element={<UnitLessons />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/lessons" element={<LessonJoin />} />
-          <Route path="/live/:sessionId" element={<LiveJoin />} />
           <Route path="/my/lessons" element={<MyLessons />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/privacy" element={<PrivacyPage />} />
@@ -47,7 +42,8 @@ function App() {
         <Footer />
       </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
