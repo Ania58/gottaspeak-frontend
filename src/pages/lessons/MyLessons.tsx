@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const API =
   (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/+$/, "") ||
@@ -37,6 +38,8 @@ export default function MyLessons() {
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState<SessionItem[]>([]);
   const [error, setError] = useState<string>("");
+
+  const [joiningId, setJoiningId] = useState<string | null>(null);
 
   const ready = useMemo(
     () => identified && Boolean(userId) && Boolean(displayName),
@@ -78,13 +81,15 @@ export default function MyLessons() {
     localStorage.setItem("gs:userId", userId);
     localStorage.setItem("gs:displayName", displayName);
     localStorage.setItem("gs:role", role);
-    localStorage.setItem("gs:identified", "1"); 
+    localStorage.setItem("gs:identified", "1");
     setIdentified(true);
   }
 
-  async function handleJoin(id: string) {
+  async function handleJoin(item: SessionItem) {
+    if (joiningId) return; 
     try {
-      const res = await fetch(`${API}/sessions/${encodeURIComponent(id)}/join`, {
+      setJoiningId(item.id);
+      const res = await fetch(`${API}/sessions/${encodeURIComponent(item.id)}/join`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, displayName, role }),
@@ -92,12 +97,19 @@ export default function MyLessons() {
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         alert(data?.error || `${res.status} ${res.statusText}`);
+        setJoiningId(null);
         return;
       }
       const data: JoinResp = await res.json();
-      window.location.href = data.url;
+
+      const w = window.open(data.url, "_blank", "noopener,noreferrer");
+      if (!w) {
+        alert("Twoja przeglądarka zablokowała otwarcie nowej karty. Zezwól na wyskakujące okna (pop-ups) i spróbuj ponownie.");
+      }
     } catch (e: any) {
       alert(String(e?.message || e));
+    } finally {
+      setTimeout(() => setJoiningId(null), 400);
     }
   }
 
@@ -152,10 +164,9 @@ export default function MyLessons() {
           <button
             type="submit"
             className="cursor-pointer mt-4 rounded-md border px-4 py-2 text-sm text-white shadow-sm bg-gradient-to-r from-lime-500 via-emerald-500 to-cyan-500"
-            >
+          >
             {t("myLessons.identity.save")}
-           </button>
-
+          </button>
           <p className="mt-2 text-xs text-black/60">{t("myLessons.identity.note")}</p>
         </form>
       )}
@@ -186,12 +197,22 @@ export default function MyLessons() {
                       </div>
                     )}
                   </div>
-                  <button
-                    onClick={() => handleJoin(s.id)}
-                    className="px-3 py-2 rounded-lg bg-slate-900 text-white hover:bg-black cursor-pointer"
-                  >
-                    {t("myLessons.join")}
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleJoin(s)}
+                      disabled={joiningId === s.id}
+                      className="px-3 py-2 rounded-lg bg-slate-900 text-white hover:bg-black disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {t("myLessons.join")}
+                    </button>
+                    <Link
+                      to={`/lessons/${s.courseLevel}/${s.unit}/${s.lesson}`}
+                      className="px-3 py-2 rounded-lg border hover:bg-black/5"
+                    >
+                      {t("unitLessons.open")}
+                    </Link>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -221,4 +242,5 @@ export default function MyLessons() {
     </div>
   );
 }
+
 
