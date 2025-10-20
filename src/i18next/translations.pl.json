@@ -207,6 +207,7 @@
     "expires": "Wygasa: {{date}}",
     "itemTitle": "Kurs {{level}} · Unit {{unit}} · Lekcja {{lesson}}",
     "changeIdentity": "Zmień dane użytkownika",
+    "popupBlocked": "Twoja przeglądarka zablokowała otwarcie nowej karty. Zezwól na wyskakujące okna i spróbuj ponownie.",
     "identity": {
       "title": "Zidentyfikuj się",
       "userId": "ID użytkownika",

@@ -206,6 +206,7 @@
     "expires": "Expira el {{date}}",
     "itemTitle": "Curso {{level}} · Unidad {{unit}} · Lección {{lesson}}",
     "changeIdentity": "Cambiar identidad del usuario",
+    "popupBlocked": "Tu navegador bloqueó la apertura de una nueva pestaña. Permite las ventanas emergentes y vuelve a intentarlo.",
     "identity": {
       "title": "Identifícate",
       "userId": "ID de usuario",

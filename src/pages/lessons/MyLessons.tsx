@@ -29,11 +29,15 @@ export default function MyLessons() {
   const { t } = useTranslation();
 
   const [userId, setUserId] = useState(() => localStorage.getItem("gs:userId") || "");
-  const [displayName, setDisplayName] = useState(() => localStorage.getItem("gs:displayName") || "");
+  const [displayName, setDisplayName] = useState(
+    () => localStorage.getItem("gs:displayName") || ""
+  );
   const [role, setRole] = useState<"teacher" | "student">(
     (localStorage.getItem("gs:role") as "teacher" | "student") || "student"
   );
-  const [identified, setIdentified] = useState(() => localStorage.getItem("gs:identified") === "1");
+  const [identified, setIdentified] = useState(
+    () => localStorage.getItem("gs:identified") === "1"
+  );
 
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState<SessionItem[]>([]);
@@ -49,6 +53,7 @@ export default function MyLessons() {
   useEffect(() => {
     let cancelled = false;
     if (!ready) return;
+
     (async () => {
       setLoading(true);
       setError("");
@@ -70,6 +75,7 @@ export default function MyLessons() {
         if (!cancelled) setLoading(false);
       }
     })();
+
     return () => {
       cancelled = true;
     };
@@ -86,7 +92,7 @@ export default function MyLessons() {
   }
 
   async function handleJoin(item: SessionItem) {
-    if (joiningId) return; 
+    if (joiningId) return;
     try {
       setJoiningId(item.id);
       const res = await fetch(`${API}/sessions/${encodeURIComponent(item.id)}/join`, {
@@ -104,7 +110,7 @@ export default function MyLessons() {
 
       const w = window.open(data.url, "_blank", "noopener,noreferrer");
       if (!w) {
-        alert("Twoja przeglądarka zablokowała otwarcie nowej karty. Zezwól na wyskakujące okna (pop-ups) i spróbuj ponownie.");
+        alert(t("myLessons.popupBlocked"));
       }
     } catch (e: any) {
       alert(String(e?.message || e));
@@ -119,8 +125,13 @@ export default function MyLessons() {
       <p className="text-black/70 mb-6">{t("myLessons.subtitle")}</p>
 
       {!identified && (
-        <form onSubmit={handleSaveIdentity} className="mb-8 rounded-xl border bg-white/80 p-4 shadow-sm">
-          <h2 className="text-lg font-semibold mb-3">{t("myLessons.identity.title")}</h2>
+        <form
+          onSubmit={handleSaveIdentity}
+          className="mb-8 rounded-xl border bg-white/80 p-4 shadow-sm"
+        >
+          <h2 className="text-lg font-semibold mb-3">
+            {t("myLessons.identity.title")}
+          </h2>
           <div className="grid gap-3 sm:grid-cols-3">
             <div className="flex flex-col">
               <label htmlFor="uid" className="text-sm text-black/70">
@@ -153,11 +164,17 @@ export default function MyLessons() {
               <select
                 id="role"
                 value={role}
-                onChange={(e) => setRole(e.target.value as "teacher" | "student")}
+                onChange={(e) =>
+                  setRole(e.target.value as "teacher" | "student")
+                }
                 className="rounded-md border px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
               >
-                <option value="student">{t("myLessons.identity.roles.student")}</option>
-                <option value="teacher">{t("myLessons.identity.roles.teacher")}</option>
+                <option value="student">
+                  {t("myLessons.identity.roles.student")}
+                </option>
+                <option value="teacher">
+                  {t("myLessons.identity.roles.teacher")}
+                </option>
               </select>
             </div>
           </div>
@@ -167,7 +184,9 @@ export default function MyLessons() {
           >
             {t("myLessons.identity.save")}
           </button>
-          <p className="mt-2 text-xs text-black/60">{t("myLessons.identity.note")}</p>
+          <p className="mt-2 text-xs text-black/60">
+            {t("myLessons.identity.note")}
+          </p>
         </form>
       )}
 
@@ -182,7 +201,10 @@ export default function MyLessons() {
           ) : (
             <ul className="grid gap-3 md:grid-cols-2">
               {items.map((s) => (
-                <li key={s.id} className="rounded-xl border p-4 flex items-center justify-between">
+                <li
+                  key={s.id}
+                  className="rounded-xl border p-4 flex items-center justify-between"
+                >
                   <div>
                     <div className="font-semibold">
                       {t("myLessons.itemTitle", {
@@ -193,7 +215,9 @@ export default function MyLessons() {
                     </div>
                     {s.expiresAt && (
                       <div className="text-xs text-black/60">
-                        {t("myLessons.expires", { date: new Date(s.expiresAt).toLocaleString() })}
+                        {t("myLessons.expires", {
+                          date: new Date(s.expiresAt).toLocaleString(),
+                        })}
                       </div>
                     )}
                   </div>
@@ -202,7 +226,7 @@ export default function MyLessons() {
                       type="button"
                       onClick={() => handleJoin(s)}
                       disabled={joiningId === s.id}
-                      className="px-3 py-2 rounded-lg bg-slate-900 text-white hover:bg-black disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="cursor-pointer px-3 py-2 rounded-lg bg-slate-900 text-white hover:bg-black disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       {t("myLessons.join")}
                     </button>
@@ -232,7 +256,7 @@ export default function MyLessons() {
                 setError("");
                 setLoading(false);
               }}
-              className="text-sm underline"
+              className="cursor-pointer text-sm underline"
             >
               {t("myLessons.changeIdentity")}
             </button>
@@ -242,5 +266,6 @@ export default function MyLessons() {
     </div>
   );
 }
+
 
 

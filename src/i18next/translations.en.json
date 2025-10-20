@@ -206,6 +206,7 @@
     "expires": "Expires on {{date}}",
     "itemTitle": "Course {{level}} · Unit {{unit}} · Lesson {{lesson}}",
     "changeIdentity": "Change user identity",
+    "popupBlocked": "Your browser blocked opening a new tab. Please allow pop-ups and try again.",
     "identity": {
       "title": "Identify yourself",
       "userId": "User ID",
