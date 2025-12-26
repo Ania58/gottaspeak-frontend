@@ -1,20 +1,27 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
+type Level = "A1" | "A2" | "B1" | "B2" | "C1";
+
+const LEVELS: Level[] = ["A1", "A2", "B1", "B2", "C1"];
+
 export default function CoursesList() {
   const { t } = useTranslation();
 
-  const courses = [
-    {
-      level: "A2",
-      title: t("courses.levelTitle", { level: "A2" }),
-      desc: t("courses.levelDesc.A2"),
-    },
-  ];
+  const courses = LEVELS.map((level) => {
+    const title = t("courses.levelTitle", { level, defaultValue: `${level} Course` });
+
+    const desc = t(`courses.levelDesc.${level}`, { defaultValue: "" });
+
+    return { level, title, desc };
+  });
 
   return (
     <div className="max-w-5xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">{t("courses.pageTitle")}</h1>
+      <h1 className="text-3xl font-bold mb-6">
+        {t("courses.pageTitle", { defaultValue: "Courses" })}
+      </h1>
+
       <div className="grid gap-4 md:grid-cols-2">
         {courses.map((c) => (
           <Link
@@ -23,9 +30,17 @@ export default function CoursesList() {
             className="block rounded-xl border p-5 hover:shadow"
           >
             <h2 className="text-xl font-semibold">{c.title}</h2>
-            <p className="text-sm text-gray-600 mt-1">{c.desc}</p>
+
+            {c.desc ? (
+              <p className="text-sm text-gray-600 mt-1">{c.desc}</p>
+            ) : (
+              <p className="text-sm text-gray-500 mt-1">
+                {t("courses.levelDesc.comingSoon", { defaultValue: "Coming soon." })}
+              </p>
+            )}
+
             <p className="mt-3 text-sm underline">
-              {t("courses.openCourse")} →
+              {t("courses.openCourse", { defaultValue: "Open course" })} →
             </p>
           </Link>
         ))}
@@ -33,4 +48,5 @@ export default function CoursesList() {
     </div>
   );
 }
+
 
